@@ -1,44 +1,7 @@
 import { delay } from 'redux-saga'
 import { put, call, takeEvery } from 'redux-saga/effects'
 
-
-//Making Firebase library return a promise for getting current user so can follow same pattern
-function firebaseGetCurrentUser(){
-  return new Promise((resolve, reject)=>{
-    window.firebase.auth().onAuthStateChanged((user)=>{
-      if (user) {
-        resolve( user )
-      }else{
-        reject()
-      }
-    });
-  })
-}
-
-function firebaseSignin(userDetails){
-  console.log("in firebase sign in")
-  return window.firebase.auth().createUserWithEmailAndPassword(userDetails.email, userDetails.password)
-  .then(function( user ){
-    console.log('response', user)
-    return { user }
-  })
-  .catch(function( error ){
-    return { error }
-  })
-}
-
-
-
-function getCurrentUserFirebase(){
-  console.log("trying to get current user")
-  return firebaseGetCurrentUser()
-  .then((user)=>{
-    return user
-  })
-  .catch(()=>{
-    return null
-  })
-}
+import {firebaseGetCurrentUser, firebaseSignin } from './firebase_helpers'
 
 
 export function* incrementAsync() {
@@ -60,7 +23,7 @@ export function* signInSubmit( action ){
 }
 
 export function* getCurrentUser(){
-    let currentUser = yield call( getCurrentUserFirebase )
+    let currentUser = yield call( firebaseGetCurrentUser )
     console.log("got the user man", currentUser)
     if( currentUser ){
       yield put({ type: "SET_USER", user: currentUser })
