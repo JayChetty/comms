@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SignUp from './SignUp';
+import App from './App';
 
 import reducer from './reducers'
 import './index.css';
@@ -20,19 +21,32 @@ const store = createStore(
 sagaMiddleware.run(rootSaga)
 
 function render(){
-  ReactDOM.render(
-    <SignUp
-      value={store.getState()}
-      onSubmit={(details) => {
-        console.log('submit')
-        return store.dispatch(
-          {type: "SIGNIN_SUBMIT",
-           email: details.email,
-           password: details.password
-          }
-        )
+  const state = store.getState()
+  let component = <SignUp
+    errorMessage={state.authError}
+    onSubmit={(details) => {
+      console.log('submit')
+      return store.dispatch(
+        {type: "SIGNIN_SUBMIT",
+         email: details.email,
+         password: details.password
+        }
+      )
+    }}
+  />
+  if(state.user){
+    component = <App
+      value={state.count}
+      onIncrement= {() =>{
+        return store.dispatch({
+          type: "INCREMENT_ASYNC"
+        })
       }}
-    />,
+    />
+  }
+
+  ReactDOM.render(
+    component,
     document.getElementById('root')
   );
 }

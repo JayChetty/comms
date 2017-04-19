@@ -16,11 +16,6 @@ function firebaseSignin(userDetails){
 }
 export function* incrementAsync() {
   console.log("fire", window.firebase)
-
-  // console.log("incremenet async", database)
-  // yield window.firebase.database().ref('count').set(
-  //   {count: 99}
-  // );
   yield call(delay, 1000)
   yield put({ type: 'INCREMENT' })
 }
@@ -31,21 +26,11 @@ export function* signInSubmit( action ){
   console.log("response", response)
   if(response.error){
     console.log( "got error", response.error )
+    yield put({ type: "SET_AUTH_ERROR", error: response.error.message })
   }else{
     console.log( "got user", response.user )
+    yield put({ type: "SET_USER", user: response.user })
   }
-  // .catch(function(error){
-  //   console.log("error", error)
-  // })
-
-  // details.email, details.password
-
-  // .catch(function(error) {
-  //   // Handle Errors here.
-  //   var errorCode = error.code;
-  //   var errorMessage = error.message;
-  //   // ...
-  // });
 }
 
 
