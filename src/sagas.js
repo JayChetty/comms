@@ -2,6 +2,18 @@ import { delay } from 'redux-saga'
 import { put, call, takeEvery } from 'redux-saga/effects'
 
 // Our worker Saga: will perform the async increment task
+function firebaseSignin(userDetails){
+  console.log("in firebase sign in")
+  return window.firebase.auth().createUserWithEmailAndPassword(userDetails.email, userDetails.password)
+  .then(function( user ){
+    console.log('response', user)
+    return { user }
+  })
+  .catch(function( error ){
+    return { error }
+  })
+
+}
 export function* incrementAsync() {
   console.log("fire", window.firebase)
 
@@ -15,11 +27,19 @@ export function* incrementAsync() {
 
 export function* signInSubmit( action ){
   console.log("signInSubmit", action)
-  yield window.firebase.auth().createUserWithEmailAndPassword(action.email, action.password)
+  let response = yield call( firebaseSignin, action )
+  console.log("response", response)
+  if(response.error){
+    console.log( "got error", response.error )
+  }else{
+    console.log( "got user", response.user )
+  }
+  // .catch(function(error){
+  //   console.log("error", error)
+  // })
 
   // details.email, details.password
 
-  console.log("got to the next bit")
   // .catch(function(error) {
   //   // Handle Errors here.
   //   var errorCode = error.code;
