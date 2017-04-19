@@ -20,6 +20,16 @@ const store = createStore(
 //set off the sagas to listen,  like little threads
 sagaMiddleware.run(rootSaga)
 
+//check if user already signed in, should this move to a sage ->  get current user from local
+// window.firebase.auth().onAuthStateChanged(function(user) {
+//   if (user) {
+//     store.dispatch(
+//       { type: "SET_USER", user: user }
+//     )
+//   }
+// });
+
+
 function render(){
   const state = store.getState()
   let component = <SignUp
@@ -53,3 +63,5 @@ function render(){
 store.subscribe( render )
 
 render()
+console.log("trying to dispatch")
+store.dispatch({ type: "GET_CURRENT_USER" })
