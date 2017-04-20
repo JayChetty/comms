@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SignUp from './SignUp';
+import SignIn from './SignIn';
 import App from './App';
 
 import reducer from './reducers'
@@ -31,7 +31,7 @@ sagaMiddleware.run(rootSaga)
 
 function render(){
   const state = store.getState()
-  let component = <SignUp
+  let component = <SignIn
     errorMessage={state.authError}
     onSubmit={(details) => {
       console.log('submit')

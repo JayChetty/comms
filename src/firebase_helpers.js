@@ -12,10 +12,20 @@ function onAuthStateChangedWrapper(){
 }
 
 export function firebaseSignin(userDetails){
-  return window.firebase.auth().createUserWithEmailAndPassword(userDetails.email, userDetails.password)
-  .then( user => { user } )
-  .catch( error  => { error } )
+  return window.firebase.auth().signInWithEmailAndPassword(userDetails.email, userDetails.password)
+  .then( (user) => {
+    return {user}
+  })
+  .catch( (error) =>{
+    return { error }
+  })
 }
+
+// export function firebaseSignUp(userDetails){
+//   return window.firebase.auth().createUserWithEmailAndPassword(userDetails.email, userDetails.password)
+//   .then( user => { user } )
+//   .catch( error  => { error } )
+// }
 
 
 export function firebaseGetCurrentUser(){
