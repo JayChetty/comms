@@ -15,7 +15,6 @@ const store = createStore(
   applyMiddleware(sagaMiddleware)
 )
 
-// const action = (type) => store.dispatch( {type} )
 
 //set off the sagas to listen,  like little threads
 sagaMiddleware.run(rootSaga)
@@ -47,7 +46,7 @@ function render(){
   if(state.user){
     component = <App
       value={state.count}
-      onIncrement= {() =>{
+      onIncrement={() =>{
         return store.dispatch({
           type: "INCREMENT_ASYNC"
         })

@@ -1,5 +1,5 @@
 import { delay } from 'redux-saga'
-import { take, put, call, takeEvery } from 'redux-saga/effects'
+import { put, call, takeEvery } from 'redux-saga/effects'
 
 import {firebaseGetCurrentUser, firebaseSignin } from './firebase_helpers'
 
