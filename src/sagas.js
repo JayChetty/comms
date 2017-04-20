@@ -1,7 +1,22 @@
 import { delay } from 'redux-saga'
 import { put, call, takeEvery } from 'redux-saga/effects'
 
-import {firebaseGetCurrentUser, firebaseSignin, firebaseUpdateCounter, firebaseGetCounterValue } from './firebase_helpers'
+import {
+  firebaseGetCurrentUser,
+  firebaseSignin,
+  firebaseUpdateCounter,
+  firebaseGetCounterValue,
+  firebaseCounterListener
+} from './firebase_helpers'
+
+// function listenToDbChanges(){
+//   let counterRef = window.firebase.database().ref('counter/');
+//   counterRef.on('value', function(snapshot) {
+//     // updateStarCount(postElement, snapshot.val());
+//     console.log("VALUE CHANGED", snapshot.val())
+//     callback( snapshot.val() )
+//   });
+// }
 
 
 export function* incrementAsync( user ) {
@@ -19,7 +34,7 @@ export function* signInSubmit( action ){
   if(response.error){
     yield put({ type: "SET_AUTH_ERROR", error: response.error.message })
   }else{
-    yield put({ type: "SET_USER", user: response.user })
+    yield put({ type: "ACTIVATE_USER", user: response.user })
   }
 }
 
@@ -28,8 +43,14 @@ export function* signInSubmit( action ){
 export function* getCurrentUser(){
     let currentUser = yield call( firebaseGetCurrentUser )
     if( currentUser ){
-      yield put({ type: "SET_USER", user: currentUser })
+      yield put({ type: "ACTIVATE_USER", user: currentUser })
     }
+}
+
+export function* activateUser(user){
+  //Have this separted out as this could be nice put to do the database listening
+  //But what is the best way to do this?
+  yield put({ type: "SET_USER", user: user })
 }
 
 // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
@@ -59,6 +80,10 @@ export function* watchIncrementAsync() {
 //   }
 // }
 
+export function* watchActivateUser() {
+  yield takeEvery('ACTIVATE_USER', activateUser)
+}
+
 export function* watchSignInSubmit() {
   yield takeEvery('SIGNIN_SUBMIT', signInSubmit)
 }
@@ -73,6 +98,7 @@ export default function* rootSaga() {
   yield [
     watchIncrementAsync(),
     watchSignInSubmit(),
-    watchGetCurrentUser()
+    watchGetCurrentUser(),
+    watchActivateUser()
   ]
 }

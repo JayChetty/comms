@@ -19,6 +19,7 @@ export function firebaseCounterListener(callback){
     console.log("VALUE CHANGED", snapshot.val())
     callback( snapshot.val() )
   });
+  return null
 }
 
 export function firebaseGetCounterValue(value){

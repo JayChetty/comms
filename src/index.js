@@ -22,22 +22,20 @@ const store = createStore(
 sagaMiddleware.run(rootSaga)
 
 //set off the db listener to update when changes happen
-firebaseCounterListener((newValue)=>{
-  console.log("callback got called")
-  return store.dispatch({
-    type: "SET_VALUE",
-    value: newValue
-  })
-})
-
-//check if user already signed in, should this move to a sage ->  get current user from local
-// window.firebase.auth().onAuthStateChanged(function(user) {
-//   if (user) {
-//     store.dispatch(
-//       { type: "SET_USER", user: user }
-//     )
-//   }
-// });
+//This is really hack,  what is a nicer way to do this?
+let startedCounterListener = false
+function listenToCounterChanges(){
+  if(!startedCounterListener){
+    startedCounterListener = true
+    firebaseCounterListener((newValue)=>{
+      console.log("callback got called")
+      return store.dispatch({
+        type: "SET_VALUE",
+        value: newValue
+      })
+    })
+  }
+}
 
 //list for changes in the firebase database
 
@@ -56,6 +54,7 @@ function render(){
     }}
   />
   if(state.user){
+    listenToCounterChanges()
     component = <App
       value={state.count}
       onIncrement={() =>{
