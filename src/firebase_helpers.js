@@ -11,6 +11,15 @@ function onAuthStateChangedWrapper(){
   })
 }
 
+export function firebaseUpdateCounter(user){
+  let database = window.firebase.database();
+  return database.ref('counter/').set(99)
+  .then((feedback)=>{
+    console.log("feedback from promise", feedback)
+    return feedback
+  });
+}
+
 export function firebaseSignin(userDetails){
   return window.firebase.auth().signInWithEmailAndPassword(userDetails.email, userDetails.password)
   .then( (user) => {

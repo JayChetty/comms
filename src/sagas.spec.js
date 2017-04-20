@@ -6,23 +6,23 @@ import {firebaseGetCurrentUser, firebaseSignin } from './firebase_helpers'
 
 import { getCurrentUser, incrementAsync, signInSubmit } from './sagas'
 
-test('incrementAsync Saga must call delay(1000)', () => {
-  const gen = incrementAsync()
-  expect(gen.next().value).toEqual(call(delay, 1000));
-});
-
-test('incrementAsync Saga must dispatch an INCREMENT action', () => {
-  const gen = incrementAsync()
-  gen.next()
-  expect(gen.next().value).toEqual(put({type: 'INCREMENT'}));
-});
-
-test('incrementAsync Saga must be done', () => {
-  const gen = incrementAsync()
-  gen.next()
-  gen.next()
-  expect(gen.next().value).toEqual( undefined );
-});
+// test('incrementAsync Saga must call delay(1000)', () => {
+//   const gen = incrementAsync()
+//   expect(gen.next().value).toEqual(call(delay, 1000));
+// });
+//
+// test('incrementAsync Saga must dispatch an INCREMENT action', () => {
+//   const gen = incrementAsync()
+//   gen.next()
+//   expect(gen.next().value).toEqual(put({type: 'INCREMENT'}));
+// });
+//
+// test('incrementAsync Saga must be done', () => {
+//   const gen = incrementAsync()
+//   gen.next()
+//   gen.next()
+//   expect(gen.next().value).toEqual( undefined );
+// });
 
 //signinSubmit
 test('signInSubmit must contact auth to try to signin', () => {

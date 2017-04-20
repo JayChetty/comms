@@ -1,11 +1,12 @@
 import { delay } from 'redux-saga'
 import { put, call, takeEvery } from 'redux-saga/effects'
 
-import {firebaseGetCurrentUser, firebaseSignin } from './firebase_helpers'
+import {firebaseGetCurrentUser, firebaseSignin, firebaseUpdateCounter } from './firebase_helpers'
 
 
-export function* incrementAsync() {
-  yield call(delay, 1000)
+export function* incrementAsync( user ) {
+  let response = yield call( firebaseUpdateCounter, user )
+  console.log("update response")
   yield put({ type: 'INCREMENT' })
 }
 
