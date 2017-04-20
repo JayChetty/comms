@@ -1,13 +1,14 @@
 import { delay } from 'redux-saga'
 import { put, call, takeEvery } from 'redux-saga/effects'
 
-import {firebaseGetCurrentUser, firebaseSignin, firebaseUpdateCounter } from './firebase_helpers'
+import {firebaseGetCurrentUser, firebaseSignin, firebaseUpdateCounter, firebaseGetCounterValue } from './firebase_helpers'
 
 
 export function* incrementAsync( user ) {
-  let response = yield call( firebaseUpdateCounter, user )
+  let value = yield call(firebaseGetCounterValue)
+  let response = yield call( firebaseUpdateCounter, value )
+  //not going to do anything with this as listening separatly to database value changes
   console.log("update response")
-  yield put({ type: 'INCREMENT' })
 }
 
 //(Intuition) These yield out Promises to the watchers that then in turn feedback to them the resolved result
@@ -39,6 +40,7 @@ export function* watchIncrementAsync() {
   //Only one can happen at a time, latest one will replace the others(traffic lights)
   // yield takeLatest('INCREMENT_ASYNC', incrementAsync)
 }
+
 
 
 //Can do all kinds of funky stuff like this - Could use a for loop and then we can only listen for a certain amount

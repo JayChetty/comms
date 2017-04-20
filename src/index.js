@@ -8,6 +8,8 @@ import './index.css';
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 
+import {firebaseCounterListener} from './firebase_helpers'
+
 import rootSaga from './sagas'
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
@@ -19,6 +21,13 @@ const store = createStore(
 //set off the sagas to listen,  like little threads
 sagaMiddleware.run(rootSaga)
 
+//set off the db listener to update when changes happen
+firebaseCounterListener((newValue)=>{
+  return store.dispatch({
+    type: "INCREMENT",
+  })
+})
+
 //check if user already signed in, should this move to a sage ->  get current user from local
 // window.firebase.auth().onAuthStateChanged(function(user) {
 //   if (user) {
@@ -28,6 +37,7 @@ sagaMiddleware.run(rootSaga)
 //   }
 // });
 
+//list for changes in the firebase database
 
 function render(){
   const state = store.getState()

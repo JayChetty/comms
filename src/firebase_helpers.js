@@ -11,7 +11,22 @@ function onAuthStateChangedWrapper(){
   })
 }
 
-export function firebaseUpdateCounter(user){
+export function firebaseCounterListener(callback){
+  let counterRef = window.firebase.database().ref('counter/');
+  counterRef.on('value', function(snapshot) {
+    // updateStarCount(postElement, snapshot.val());
+    callback(snapshot.val())
+  });
+}
+
+export function firebaseGetCounterValue(value){
+  return window.firebase.database().ref('/counter').once('value')
+  .then(function(snapshot) {
+    return snapshot.val();
+  });
+}
+
+export function firebaseUpdateCounter(value){
   let database = window.firebase.database();
   return database.ref('counter/').set(99)
   .then((feedback)=>{
