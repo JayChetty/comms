@@ -5,8 +5,10 @@ import {firebaseGetCurrentUser, firebaseSignin, firebaseUpdateCounter, firebaseG
 
 
 export function* incrementAsync( user ) {
+  console.log("TRYING TO INCREMENT DATABASE")
   let value = yield call(firebaseGetCounterValue)
-  let response = yield call( firebaseUpdateCounter, value )
+  console.log("TGOT VALUE", value)
+  let response = yield call( firebaseUpdateCounter, value + 1 )
   //not going to do anything with this as listening separatly to database value changes
   console.log("update response")
 }

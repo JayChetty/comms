@@ -23,8 +23,10 @@ sagaMiddleware.run(rootSaga)
 
 //set off the db listener to update when changes happen
 firebaseCounterListener((newValue)=>{
+  console.log("callback got called")
   return store.dispatch({
-    type: "INCREMENT",
+    type: "SET_VALUE",
+    value: newValue
   })
 })
 

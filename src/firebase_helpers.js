@@ -12,10 +12,12 @@ function onAuthStateChangedWrapper(){
 }
 
 export function firebaseCounterListener(callback){
+  console.log("listening to changes")
   let counterRef = window.firebase.database().ref('counter/');
   counterRef.on('value', function(snapshot) {
     // updateStarCount(postElement, snapshot.val());
-    callback(snapshot.val())
+    console.log("VALUE CHANGED", snapshot.val())
+    callback( snapshot.val() )
   });
 }
 
@@ -28,7 +30,7 @@ export function firebaseGetCounterValue(value){
 
 export function firebaseUpdateCounter(value){
   let database = window.firebase.database();
-  return database.ref('counter/').set(99)
+  return database.ref('counter/').set(value)
   .then((feedback)=>{
     console.log("feedback from promise", feedback)
     return feedback
