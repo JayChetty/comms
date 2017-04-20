@@ -19,7 +19,6 @@ export function* signInSubmit( action ){
   }
 }
 
-
 //The watcher will trigger d.throw if .catch.  This will enter any catch block in here. So can do error checking
 //in here.
 export function* getCurrentUser(){

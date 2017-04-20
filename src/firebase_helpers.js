@@ -12,26 +12,14 @@ function onAuthStateChangedWrapper(){
 }
 
 export function firebaseSignin(userDetails){
-  console.log("in firebase sign in")
   return window.firebase.auth().createUserWithEmailAndPassword(userDetails.email, userDetails.password)
-  .then(function( user ){
-    console.log('response', user)
-    return { user }
-  })
-  .catch(function( error ){
-    return { error }
-  })
+  .then( user => { user } )
+  .catch( error  => { error } )
 }
 
 
-
 export function firebaseGetCurrentUser(){
-  console.log("trying to get current user")
   return onAuthStateChangedWrapper()
-  .then((user)=>{
-    return user
-  })
-  .catch(()=>{
-    return null
-  })
+  .then( user => user )
+  .catch( () => null )
 }
