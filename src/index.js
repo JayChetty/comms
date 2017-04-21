@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import SignIn from './components/SignIn';
-import App from './components/App';
 import Events from './components/Events';
 
 import reducer from './reducers'
