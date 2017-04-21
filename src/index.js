@@ -15,8 +15,20 @@ import rootSaga from './sagas'
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
   reducer,
+  window.devToolsExtension && window.devToolsExtension(),
   applyMiddleware(sagaMiddleware)
 )
+
+import { Provider } from 'react-redux';
+// import {Router, Route, browserHistory, IndexRedirect} from 'react-router';
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
+
+import AppContainer from './components/AppContainer'
 
 
 //set off the sagas to listen,  like little threads
@@ -47,40 +59,49 @@ function listenToDBChanges(){
 
 //list for changes in the firebase database
 
-function render(){
-  const state = store.getState()
-  let component = <SignIn
-    errorMessage={state.authError}
-    onSubmit={(details) => {
-      console.log('submit')
-      return store.dispatch(
-        {type: "SIGNIN_SUBMIT",
-         email: details.email,
-         password: details.password
-        }
-      )
-    }}
-  />
-  if(state.user){
-    listenToDBChanges()
-    component = <Events
-      // value={state.count}
-      events={state.events}
-      onIncrement={() =>{
-        return store.dispatch({
-          type: "INCREMENT_ASYNC"
-        })
-      }}
-    />
-  }
-
-  ReactDOM.render(
-    component,
-    document.getElementById('root')
-  );
-}
-store.subscribe( render )
-
-render()
-console.log("trying to dispatch")
+ReactDOM.render(
+  <Provider store={store}>
+    <Router>
+      <Route path='/' component={AppContainer}>
+      </Route>
+    </Router>
+  </Provider>,
+  document.getElementById('root')
+)
 store.dispatch({ type: "GET_CURRENT_USER" })
+// function render(){
+//   const state = store.getState()
+//   let component = <SignIn
+//     errorMessage={state.authError}
+//     onSubmit={(details) => {
+//       console.log('submit')
+//       return store.dispatch(
+//         {type: "SIGNIN_SUBMIT",
+//          email: details.email,
+//          password: details.password
+//         }
+//       )
+//     }}
+//   />
+//   if(state.user){
+//     listenToDBChanges()
+//     component = <Events
+//       // value={state.count}
+//       events={state.events}
+//       onIncrement={() =>{
+//         return store.dispatch({
+//           type: "INCREMENT_ASYNC"
+//         })
+//       }}
+//     />
+//   }
+//
+//   ReactDOM.render(
+//     <Provider store={store}>
+//       { component }
+//     </Provider>,
+//     document.getElementById('root')
+//   );
+// }
+// store.subscribe( render )
+// render()
