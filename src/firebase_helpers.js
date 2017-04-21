@@ -12,11 +12,16 @@ function onAuthStateChangedWrapper(){
 }
 
 export function firebaseCounterListener(callback){
-  console.log("listening to changes")
   let counterRef = window.firebase.database().ref('counter/');
   counterRef.on('value', function(snapshot) {
-    // updateStarCount(postElement, snapshot.val());
-    console.log("VALUE CHANGED", snapshot.val())
+    callback( snapshot.val() )
+  });
+  return null
+}
+
+export function firebaseEventsListener(callback){
+  let counterRef = window.firebase.database().ref('events/');
+  counterRef.on('value', function(snapshot) {
     callback( snapshot.val() )
   });
   return null
