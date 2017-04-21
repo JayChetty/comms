@@ -30,6 +30,7 @@ export function* incrementAsync( user ) {
 
 //(Intuition) These yield out Promises to the watchers that then in turn feedback to them the resolved result
 export function* signInSubmit( action ){
+  console.log("sign in submit received", action)
   let response = yield call( firebaseSignin, action )
   if(response.error){
     yield put({ type: "SET_AUTH_ERROR", error: response.error.message })

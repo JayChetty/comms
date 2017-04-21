@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux'
+
+import {
+  Redirect
+} from 'react-router-dom'
 
 class SignIn extends Component {
   constructor(props){
@@ -14,10 +19,19 @@ class SignIn extends Component {
   }
   handleSubmit(event){
     event.preventDefault()
-    this.props.onSubmit(this.state)
+    // this.props.onSubmit(this.state)
+    this.props.dispatch(
+    {type: "SIGNIN_SUBMIT",
+     email: this.state.email,
+     password: this.state.password
+    })
     console.log("about to submit", this.state)
   }
   render() {
+    console.log('rendering sign in', this.props)
+    if(this.props.user){
+      return <Redirect to="/events"/>
+    }
     return (
       <div className="App">
         <div className="App-header">
@@ -41,4 +55,10 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+const mapStateToProps = state => state
+
+const mapDispatchToProps = (dispatch)=>{
+  return { dispatch: dispatch }
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( SignIn )

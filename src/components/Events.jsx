@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux'
 
 class Events extends Component {
   render() {
-    console.log("prop events", this.props.events)
+    console.log("rendering events prop events", this.props.events)
     const events = this.props.events
     const eventListItems = Object.keys(events).map((key)=>{
       return ( <li key={key}> {events[key].name} </li> )
@@ -24,4 +25,10 @@ class Events extends Component {
   }
 }
 
-export default Events;
+const mapStateToProps = state => state
+
+const mapDispatchToProps = (dispatch)=>{
+  return { dispatch: dispatch }
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Events )

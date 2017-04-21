@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import SignIn from './components/SignIn';
+import App from './components/App';
+import Events from './components/Events';
 
 import reducer from './reducers'
 import './index.css';
@@ -23,10 +26,9 @@ import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Redirect
 } from 'react-router-dom'
-
-import AppContainer from './components/AppContainer'
 
 
 //set off the sagas to listen,  like little threads
@@ -35,7 +37,7 @@ sagaMiddleware.run(rootSaga)
 //set off the db listener to update when changes happen
 //This is really hack,  what is a nicer way to do this?
 let startedDBListener = false
-function listenToDBChanges(){
+function listenToDBChanges(past){
   if(store.getState().user && !startedDBListener){
     startedDBListener = true
     firebaseCounterListener((newValue)=>{
@@ -57,13 +59,27 @@ function listenToDBChanges(){
 
 store.subscribe( listenToDBChanges )
 
-//list for changes in the firebase database
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    store.getState().user ? (
+      <Component {...props}/>
+    ) : (
+      <Redirect to={{
+        pathname: '/signin',
+        state: { from: props.location }
+      }}/>
+    )
+  )}/>
+)
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Route path='/' component={AppContainer}>
-      </Route>
+      <div>
+        <PrivateRoute exact path='/' component={Events}/>
+        <PrivateRoute path='/events' component={Events}/>
+        <Route path='/signin' component={SignIn}/>
+      </div>
     </Router>
   </Provider>,
   document.getElementById('root')
