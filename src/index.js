@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SignIn from './SignIn';
-import App from './App';
-import Events from './Events';
+
 
 import reducer from './reducers'
 import './index.css';
@@ -38,7 +36,7 @@ sagaMiddleware.run(rootSaga)
 //This is really hack,  what is a nicer way to do this?
 let startedDBListener = false
 function listenToDBChanges(){
-  if(!startedDBListener){
+  if(store.getState().user && !startedDBListener){
     startedDBListener = true
     firebaseCounterListener((newValue)=>{
       return store.dispatch({
@@ -56,6 +54,8 @@ function listenToDBChanges(){
     })
   }
 }
+
+store.subscribe( listenToDBChanges )
 
 //list for changes in the firebase database
 
