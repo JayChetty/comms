@@ -11,13 +11,6 @@ function onAuthStateChangedWrapper(){
   })
 }
 
-export function firebaseCounterListener(callback){
-  let counterRef = window.firebase.database().ref('counter/');
-  counterRef.on('value', function(snapshot) {
-    callback( snapshot.val() )
-  });
-  return null
-}
 
 export function firebaseEventsListener(callback){
   let counterRef = window.firebase.database().ref('events/');
@@ -27,21 +20,29 @@ export function firebaseEventsListener(callback){
   return null
 }
 
-export function firebaseGetCounterValue(value){
-  return window.firebase.database().ref('/counter').once('value')
-  .then(function(snapshot) {
-    return snapshot.val();
-  });
-}
+// export function firebaseCounterListener(callback){
+//   let counterRef = window.firebase.database().ref('counter/');
+//   counterRef.on('value', function(snapshot) {
+//     callback( snapshot.val() )
+//   });
+//   return null
+// }
 
-export function firebaseUpdateCounter(value){
-  let database = window.firebase.database();
-  return database.ref('counter/').set(value)
-  .then((feedback)=>{
-    console.log("feedback from promise", feedback)
-    return feedback
-  });
-}
+// export function firebaseGetCounterValue(value){
+//   return window.firebase.database().ref('/counter').once('value')
+//   .then(function(snapshot) {
+//     return snapshot.val();
+//   });
+// }
+//
+// export function firebaseUpdateCounter(value){
+//   let database = window.firebase.database();
+//   return database.ref('counter/').set(value)
+//   .then((feedback)=>{
+//     console.log("feedback from promise", feedback)
+//     return feedback
+//   });
+// }
 
 export function firebaseSignin(userDetails){
   return window.firebase.auth().signInWithEmailAndPassword(userDetails.email, userDetails.password)
@@ -52,6 +53,8 @@ export function firebaseSignin(userDetails){
     return { error }
   })
 }
+
+
 
 // export function firebaseSignUp(userDetails){
 //   return window.firebase.auth().createUserWithEmailAndPassword(userDetails.email, userDetails.password)

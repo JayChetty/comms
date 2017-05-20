@@ -1,8 +1,12 @@
+import registerServiceWorker from './registerServiceWorker';
+
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import SignIn from './components/SignIn';
 import Events from './components/Events';
+import Event from './components/Event';
 
 import reducer from './reducers'
 import './index.css';
@@ -12,14 +16,10 @@ import createSagaMiddleware from 'redux-saga'
 import {firebaseCounterListener, firebaseEventsListener} from './firebase_helpers'
 
 import rootSaga from './sagas'
-const sagaMiddleware = createSagaMiddleware()
-const store = createStore(
-  reducer,
-  window.devToolsExtension && window.devToolsExtension(),
-  applyMiddleware(sagaMiddleware)
-)
+
 
 import { Provider } from 'react-redux';
+
 // import {Router, Route, browserHistory, IndexRedirect} from 'react-router';
 
 import {
@@ -29,6 +29,14 @@ import {
   Redirect
 } from 'react-router-dom'
 
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(
+  reducer,
+  window.devToolsExtension && window.devToolsExtension(),
+  applyMiddleware(sagaMiddleware)
+)
+
+registerServiceWorker()
 
 //set off the sagas to listen,  like little threads
 sagaMiddleware.run(rootSaga)
@@ -39,13 +47,6 @@ let startedDBListener = false
 function listenToDBChanges(past){
   if(store.getState().user && !startedDBListener){
     startedDBListener = true
-    firebaseCounterListener((newValue)=>{
-      return store.dispatch({
-        type: "SET_VALUE",
-        value: newValue
-      })
-    })
-
     firebaseEventsListener((newEvents)=>{
       console.log("callback got called")
       return store.dispatch({
@@ -58,6 +59,8 @@ function listenToDBChanges(past){
 
 store.subscribe( listenToDBChanges )
 
+
+//Now what is really going on here? HOC right
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
     store.getState().user ? (
@@ -76,7 +79,8 @@ ReactDOM.render(
     <Router>
       <div>
         <PrivateRoute exact path='/' component={Events}/>
-        <PrivateRoute path='/events' component={Events}/>
+        <PrivateRoute path='/events/:eventId' component={Event}/>
+        <PrivateRoute exact path='/events' component={Events}/>
         <Route path='/signin' component={SignIn}/>
       </div>
     </Router>
