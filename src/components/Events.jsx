@@ -7,9 +7,9 @@ import {
 } from 'react-router-dom'
 
 
-function Events( props ) {
-  console.log("rendering events prop events", props.events)
-  const events = props.events
+export default function Events( { events } ) {
+  console.log("rendering events prop events", events)
+  // const events = props.events
   const eventListItems = Object.keys(events).map((key)=>{
     return ( <li key={key}> <Link to={`/events/${key}`}> {events[key].name} </Link> </li> )
   })
@@ -28,10 +28,10 @@ function Events( props ) {
 }
 
 
-const mapStateToProps = state => state
-
-const mapDispatchToProps = (dispatch)=>{
-  return { dispatch: dispatch }
-}
-
-export default connect( mapStateToProps, mapDispatchToProps )( Events )
+// const mapStateToProps = state => state
+//
+// const mapDispatchToProps = (dispatch)=>{
+//   return { dispatch: dispatch }
+// }
+//
+// export default connect( mapStateToProps, mapDispatchToProps )( Events )
