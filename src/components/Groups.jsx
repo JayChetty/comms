@@ -22,7 +22,7 @@ function Groups( props ) {
   console.log("rendering groups props", props)
   const groups = props.groups
   const groupListItems = Object.keys(groups).map((key)=>{
-    return ( <li key={key}> <Link to={`/groups/${key}`}> {key} </Link> </li> )
+    return ( <li key={key}> <Link to={`/groups/${key}`}> {groups[key].name} </Link> </li> )
   })
   return (
     <div className="App">

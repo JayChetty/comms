@@ -7,11 +7,11 @@ import {
 } from 'react-router-dom'
 
 
-export default function Events( { events } ) {
-  console.log("rendering events prop events", events)
+export default function Events( { group, events, groupId } ) {
+  console.log("rendering events prop events", events, group, groupId)
   // const events = props.events
-  const eventListItems = Object.keys(events).map((key)=>{
-    return ( <li key={key}> <Link to={`/events/${key}`}> {events[key].name} </Link> </li> )
+  const eventListItems = events.map((event)=>{
+    return ( <li key={event.id}> <Link to={`${groupId}/events/${event.id}`}> {event.name} </Link> </li> )
   })
 
   return (

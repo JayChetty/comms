@@ -2,19 +2,28 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Events from './Events'
 
-function Group({group}){
-  console.log("group", group)
+function Group({group, events, id}){
+  console.log("Group id", id)
+  const groupEvents = Object.keys(group.events).map( eventKey => {
+    const event = events[eventKey]
+    event.id = eventKey
+    return event
+  })
+  console.log("groupEvents", groupEvents)
   return (
     <div className="App">
-      {group}
-      <Events events={group.events}> </Events>
+      <h2> {group.name} </h2>
+      <Events group={group} groupId={id} events={groupEvents}> </Events>
     </div>
   );
 }
 
 const mapStateToProps = (state, {match}) =>{
   const group = state.groups[match.params.groupId]
-  return {group}
+  const events = state.events
+  const id = match.params.groupId
+  console.log("id", id)
+  return {group, events, id}
 }
 
 const mapDispatchToProps = (dispatch)=>{

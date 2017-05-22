@@ -30,7 +30,7 @@ export function* getCurrentUser(){
     }
 }
 
-export function* activateUser(user){
+export function* activateUser({ user }){
   //Have this separted out as this could be nice put to do the database listening
   //But what is the best way to do this?
   // let groups = yield call( firebaseGetCurrentUser )

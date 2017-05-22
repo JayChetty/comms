@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import SignIn from './components/SignIn';
 import Groups from './components/Groups';
 import Group from './components/Group';
+import Event from './components/Event';
 
 import reducer from './reducers'
 import './index.css';
@@ -49,8 +50,12 @@ function listenToDBChanges(past){
   if(user && !startedDBListener){
     startedDBListener = true
     firebaseEventsListener("groups/", user, (newGroups)=>{
-      console.log("callback got called", newGroups)
+      console.log("groups updated", newGroups)
       return store.dispatch({type: "SET_GROUPS",groups: newGroups})
+    })
+    firebaseEventsListener("events/", user, (newEvents)=>{
+      console.log("events updated", newEvents)
+      return store.dispatch({type: "SET_EVENTS",events: newEvents})
     })
   }
 }
@@ -77,7 +82,8 @@ ReactDOM.render(
     <Router>
       <div>
         <PrivateRoute exact path='/' component={Groups}/>
-        <PrivateRoute path='/groups/:groupId' component={Group}/>
+        <PrivateRoute exact path='/groups/:groupId' component={Group}/>
+        <PrivateRoute exact path='/groups/:groupId/events/:eventId' component={Event}/>
         <PrivateRoute exact path='/groups' component={Groups}/>
         <Route path='/signin' component={SignIn}/>
       </div>
