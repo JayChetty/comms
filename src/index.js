@@ -44,16 +44,22 @@ sagaMiddleware.run(rootSaga)
 
 //set off the db listener to update when changes happen
 //This is really hack,  what is a nicer way to do this?
+//Can we do this in a saga - problem would need to be in method on then,  which cannot yield as is not a generator
 let startedDBListener = false
 function listenToDBChanges(past){
   const user = store.getState().user
   if(user && !startedDBListener){
     startedDBListener = true
-    firebaseEventsListener("groups/", user, (newGroups)=>{
-      console.log("groups updated", newGroups)
-      return store.dispatch({type: "SET_GROUPS",groups: newGroups})
+    firebaseEventsListener(`users/${user.uid}/groups/`, (userGroups)=>{
+      console.log("groups updated", userGroups)
+      Object.keys(userGroups).forEach((groupId)=>{
+        firebaseEventsListener(`groups/${groupId}`, (group)=>{//TODO check security of this
+          return store.dispatch({type: "SET_GROUP", groupId: groupId, group: group})
+        })
+      })
+      // return store.dispatch({type: "SET_GROUPS",groups: newGroups})
     })
-    firebaseEventsListener("events/", user, (newEvents)=>{
+    firebaseEventsListener("events/", (newEvents)=>{
       console.log("events updated", newEvents)
       return store.dispatch({type: "SET_EVENTS",events: newEvents})
     })
@@ -63,7 +69,7 @@ function listenToDBChanges(past){
 store.subscribe( listenToDBChanges )
 
 
-//Now what is really going on here? HOC right
+//Based on example in docs, Now what is really going on here? HOC right
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
     store.getState().user ? (
