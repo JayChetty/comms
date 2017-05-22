@@ -29,7 +29,7 @@ import {
   Link,
   Redirect
 } from 'react-router-dom'
-
+console.log("STARTED NEW NEW NEW")
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
   reducer,
