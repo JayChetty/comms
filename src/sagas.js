@@ -6,11 +6,9 @@ import {
   firebaseSignin,
   firebaseUpdateCounter,
   firebaseGetCounterValue,
-  firebaseCounterListener
+  firebaseCounterListener,
+  firebaseEventsListener
 } from './firebase_helpers'
-
-
-
 
 //(Intuition) These yield out Promises to the watchers that then in turn feedback to them the resolved result
 export function* signInSubmit( action ){
@@ -35,7 +33,15 @@ export function* getCurrentUser(){
 export function* activateUser(user){
   //Have this separted out as this could be nice put to do the database listening
   //But what is the best way to do this?
+  // let groups = yield call( firebaseGetCurrentUser )
+  // firebaseEventsListener("groups/", user,
+  // firebaseEventsListener("groups/", user, (groups)=>{
+  //   console.log("value from events listener", groups)
+  //   yield put({ type: "SET_GROUPS", groups: groups })
+  // })
+  console.log('activating user', user)
   yield put({ type: "SET_USER", user: user })
+
 }
 
 //Can do all kinds of funky stuff like this - Could use a for loop and then we can only listen for a certain amount
@@ -63,6 +69,10 @@ export function* watchSignInSubmit() {
 export function* watchGetCurrentUser() {
   yield takeEvery('GET_CURRENT_USER', getCurrentUser)
 }
+
+// export function* watchGetCurrentUser() {
+//   yield takeEvery('GET_CURRENT_USER', getCurrentUser)
+// }
 
 
 

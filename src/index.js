@@ -5,8 +5,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import SignIn from './components/SignIn';
-import Events from './components/Events';
-import Event from './components/Event';
+import Groups from './components/Groups';
+import Group from './components/Group';
 
 import reducer from './reducers'
 import './index.css';
@@ -45,14 +45,12 @@ sagaMiddleware.run(rootSaga)
 //This is really hack,  what is a nicer way to do this?
 let startedDBListener = false
 function listenToDBChanges(past){
-  if(store.getState().user && !startedDBListener){
+  const user = store.getState().user
+  if(user && !startedDBListener){
     startedDBListener = true
-    firebaseEventsListener((newEvents)=>{
-      console.log("callback got called")
-      return store.dispatch({
-        type: "SET_EVENTS",
-        events: newEvents
-      })
+    firebaseEventsListener("groups/", user, (newGroups)=>{
+      console.log("callback got called", newGroups)
+      return store.dispatch({type: "SET_GROUPS",groups: newGroups})
     })
   }
 }
@@ -78,9 +76,9 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div>
-        <PrivateRoute exact path='/' component={Events}/>
-        <PrivateRoute path='/events/:eventId' component={Event}/>
-        <PrivateRoute exact path='/events' component={Events}/>
+        <PrivateRoute exact path='/' component={Groups}/>
+        <PrivateRoute path='/groups/:groupId' component={Group}/>
+        <PrivateRoute exact path='/groups' component={Groups}/>
         <Route path='/signin' component={SignIn}/>
       </div>
     </Router>

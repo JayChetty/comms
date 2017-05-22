@@ -30,7 +30,7 @@ class SignIn extends Component {
   render() {
     console.log('rendering sign in', this.props)
     if(this.props.user){
-      return <Redirect to="/events"/>
+      return <Redirect to="/groups"/>
     }
     return (
       <div className="App">

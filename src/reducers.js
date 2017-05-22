@@ -10,6 +10,8 @@ export default function(state = initialState, action){
       return Object.assign({}, state, {events: action.events})
     case 'SET_USER':
       return Object.assign({}, state, {user: action.user})
+    case 'SET_GROUPS':
+      return Object.assign({}, state, {groups: action.groups})
     case 'SET_AUTH_ERROR':
       return Object.assign({}, state, {authError: action.error})
     default:
