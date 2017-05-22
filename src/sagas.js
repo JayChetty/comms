@@ -70,6 +70,10 @@ export function* watchGetCurrentUser() {
   yield takeEvery('GET_CURRENT_USER', getCurrentUser)
 }
 
+// export function* watchUpdateSubmission() {
+//   yield takeEvery('UPDATE_SUBMISSION', updateSubmission)
+// }
+
 // export function* watchGetCurrentUser() {
 //   yield takeEvery('GET_CURRENT_USER', getCurrentUser)
 // }
@@ -80,6 +84,7 @@ export default function* rootSaga() {
   yield [
     watchSignInSubmit(),
     watchGetCurrentUser(),
-    watchActivateUser()
+    watchActivateUser(),
+    // watchUpdateSubmission()
   ]
 }

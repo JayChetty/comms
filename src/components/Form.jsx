@@ -7,7 +7,7 @@ import './App.css';
 // } from 'react-router-dom'
 
 
-export default function Form( { form, submission } ) {
+export default function Form( { form, submission, onFormChange } ) {
   console.log("form", submission)
   const dataSource = submission || form.default
   // // const events = props.events
@@ -17,7 +17,7 @@ export default function Form( { form, submission } ) {
     return(
       <label key={formKey}>
         {formKey}:
-        <input value={dataSource[formKey]} name={formKey} type='text'/>
+        <input onChange={ (event)=>onFormChange(event.target.value, formKey) } value={dataSource[formKey]} name={formKey} type='text'/>
       </label>
     )
   })

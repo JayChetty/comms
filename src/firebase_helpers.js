@@ -44,6 +44,27 @@ export function firebaseEventsListener(data, user, callback){
 //   });
 // }
 
+export function firebaseUpdateValue(route, value){
+  let database = window.firebase.database();
+  console.log("firebaseUpdateValue", route)
+  return database.ref(route).set(value)
+  .then((feedback)=>{
+    console.log("feedback from promise", feedback)
+    return feedback
+  });
+}
+
+// export function firebaseUpdateSubmission(groupId, userId, eventId, category, value){
+//   let database = window.firebase.database();
+//   const routeString = `/${groupId}/${userId}/${eventId}/${category}/`
+//   console.log("routeString", routeString)
+//   return database.ref(routeString).set(value)
+//   .then((feedback)=>{
+//     console.log("feedback from promise", feedback)
+//     return feedback
+//   });
+// }
+
 export function firebaseSignin(userDetails){
   return window.firebase.auth().signInWithEmailAndPassword(userDetails.email, userDetails.password)
   .then( (user) => {

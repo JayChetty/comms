@@ -1,25 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Form from './Form'
+import { firebaseUpdateValue } from '../firebase_helpers'
 
-
-function Event({event, group, submission}){
-  console.log('trying to show event', event, group)
+function Event({dispatch, event, group, submission, updateSubmission}){
   return (
     <div className="App">
       {event.name}
-      <Form form={event.form} submission={submission}></Form>
+      <Form form={event.form} submission={submission} onFormChange={updateSubmission}></Form>
     </div>
   );
 }
 
 const mapStateToProps = (state, {match}) =>{
-  console.log('STATE', state)
   const event = state.events[match.params.eventId]
   const group = state.groups[match.params.groupId]
   //need to get submission from the group event
   const submission = group.events[match.params.eventId].submissions[state.user.uid]
-  return {event, group, submission}
+
+  const updateSubmission = (value, formCategory)=>{
+    console.log("updating submission", value, formCategory)
+    const routeString = `/groups/${match.params.groupId}/events/${match.params.eventId}/submissions/${state.user.uid}/${formCategory}/`
+    firebaseUpdateValue(routeString, value)
+  }
+
+  return {
+    event,
+    group,
+    submission,
+    updateSubmission
+  }
 }
 
 const mapDispatchToProps = (dispatch)=>{
