@@ -1,0 +1,15 @@
+.Groups{
+  display: flex;
+  flex-direction: column;
+}
+
+.Groups-item{
+  flex: 1;
+  text-align: center;
+  padding: 15px;
+  border-bottom: 1px solid black;
+}
+
+li{
+  text-decoration: none;
+}

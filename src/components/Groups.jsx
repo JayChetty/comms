@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
 import { connect } from 'react-redux'
+import AppHeader from './AppHeader'
+import './Groups.css'
 
 import {
   Link,
@@ -22,17 +23,14 @@ function Groups( props ) {
   console.log("rendering groups props", props)
   const groups = props.groups
   const groupListItems = Object.keys(groups).map((key)=>{
-    return ( <li key={key}> <Link to={`/groups/${key}`}> {groups[key].name} </Link> </li> )
+    return ( <div className="Groups-item" key={key}> <Link to={`/groups/${key}`}> {groups[key].name} </Link> </div> )
   })
   return (
-    <div className="App">
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to Comms</h2>
-      </div>
-      <ul>
+    <div>
+      <AppHeader/>
+      <div className="Groups">
         { groupListItems }
-      </ul>
+      </div>
     </div>
   );
 }

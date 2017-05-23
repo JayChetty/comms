@@ -1,0 +1,29 @@
+.SignIn{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  /*background-color: red;*/
+  height: 100vh;
+  justify-content: center;
+}
+
+.SignIn-item{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  /*background-color: blue;*/
+  justify-content: center;
+  padding: 20px;
+  flex: 1;
+}
+
+.SignIn-button{
+  border: 1px solid black;
+}
+Input{
+  border: 1px solid black;
+  height: 25px;
+}
+Label{
+  padding: 5px;
+}

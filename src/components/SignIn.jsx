@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
 import { connect } from 'react-redux'
-
+import './SignIn.css'
+import AppHeader from './AppHeader.jsx'
 import {
   Redirect
 } from 'react-router-dom'
@@ -33,23 +33,28 @@ class SignIn extends Component {
       return <Redirect to="/groups"/>
     }
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2> Sign In!!!</h2>
+      <div>
+        <AppHeader/>
+        <section className="SignIn">
           <p>{this.props.errorMessage}</p>
-        </div>
-        <form onSubmit={this.handleSubmit}>
-          <label onChange={this.handleInputChange}>
-            Email:
-            <input name='email' type='email'/>
-          </label>
-          <label onChange={this.handleInputChange}>
-            Password:
-            <input name='password' type='password'/>
-          </label>
-          <input type="submit" value="submit" />
-        </form>
+          <form onSubmit={this.handleSubmit}>
+            <div className="SignIn-item">
+              <label for="email">
+                email
+              </label>
+              <input onChange={this.handleInputChange} name='email' type='email'/>
+            </div>
+            <div className="SignIn-item">
+              <label for="password" >
+                password
+              </label>
+              <input onChange={this.handleInputChange} name='password' type='password'/>
+            </div>
+            <div className="SignIn-item">
+              <input className="SignIn-button" type="submit" value="submit" />
+            </div>
+          </form>
+        </section>
       </div>
     );
   }
