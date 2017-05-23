@@ -1,8 +1,8 @@
 .AppHeader{
-  height: 50px;
-  background-color: gray;
+  height: 10vh;
+  background-color: #aabbcc;
   text-align: center;
-  padding-top:15px;
+  /*padding-top:15px;*/
   display: flex;
   flex-direction:row;
 }
@@ -17,7 +17,7 @@ i{
 
 h1{
   font-size: 25px;
-  margin-top:0px;
+  /*margin-top:0px;*/
   flex:5
 }
 .menu{

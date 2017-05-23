@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 
 function AppHeader({hasGroup, title}){
-  const headerTitle = title || "comms"
+  const headerTitle = title || "oleApp"
   let backButton = null
   if(hasGroup){
     backButton = (
@@ -33,7 +33,7 @@ const mapStateToProps = (state, router) =>{
   if(!state.groups || !state.events || locationParts.length <= 2){
     return{
       hasGroup: false,
-      title: "comms"
+      title: "oleApp"
     }
   }
   const hasGroup = true

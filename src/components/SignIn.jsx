@@ -25,15 +25,14 @@ class SignIn extends Component {
      email: this.state.email,
      password: this.state.password
     })
-    console.log("about to submit", this.state)
   }
   render() {
-    console.log('rendering sign in', this.props)
     if(this.props.user){
       return <Redirect to="/groups"/>
     }
     return (
       <section className="SignIn">
+        <h2> Login </h2>
         <p>{this.props.errorMessage}</p>
         <form onSubmit={this.handleSubmit}>
           <div className="SignIn-item">
