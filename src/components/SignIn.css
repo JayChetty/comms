@@ -5,6 +5,7 @@
   /*background-color: red;*/
   height: 90vh;
   justify-content: center;
+  align-items: center;
 }
 
 .SignIn-item{
@@ -13,17 +14,9 @@
   flex-direction: column;
   /*background-color: blue;*/
   justify-content: center;
-  padding: 20px;
   flex: 1;
 }
 
-.SignIn-button{
-  border: 1px solid black;
-}
-Input{
-  border: 1px solid black;
-  height: 25px;
-}
-Label{
-  padding: 5px;
+.SignIn-submit{
+  padding-top: 30px;
 }

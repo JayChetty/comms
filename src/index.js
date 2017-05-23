@@ -18,9 +18,10 @@ import createSagaMiddleware from 'redux-saga'
 import {firebaseCounterListener, firebaseEventsListener} from './firebase_helpers'
 
 import rootSaga from './sagas'
-
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import { Provider } from 'react-redux';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 // import {Router, Route, browserHistory, IndexRedirect} from 'react-router';
 
@@ -30,6 +31,9 @@ import {
   Link,
   Redirect
 } from 'react-router-dom'
+
+injectTapEventPlugin()
+
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
   reducer,
@@ -84,18 +88,20 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 )
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <div>
-        <Route path='/' component={AppHeader}/>
-        <PrivateRoute exact path='/' component={Groups}/>
-        <PrivateRoute exact path='/groups/:groupId/events/:eventId' component={Event}/>
-        <PrivateRoute exact path='/groups/:groupId' component={Group}/>
-        <PrivateRoute exact path='/groups' component={Groups}/>
-        <Route path='/signin' component={SignIn}/>
-      </div>
-    </Router>
-  </Provider>,
+  <MuiThemeProvider>
+    <Provider store={store}>
+      <Router>
+          <div>
+            <Route path='/' component={AppHeader}/>
+            <PrivateRoute exact path='/' component={Groups}/>
+            <PrivateRoute exact path='/groups/:groupId/events/:eventId' component={Event}/>
+            <PrivateRoute exact path='/groups/:groupId' component={Group}/>
+            <PrivateRoute exact path='/groups' component={Groups}/>
+            <Route path='/signin' component={SignIn}/>
+          </div>
+      </Router>
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById('root')
 )
 store.dispatch({ type: "GET_CURRENT_USER" })

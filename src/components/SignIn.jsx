@@ -7,6 +7,9 @@ import {
   Redirect
 } from 'react-router-dom'
 
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField'
+
 class SignIn extends Component {
   constructor(props){
     super(props);
@@ -32,23 +35,29 @@ class SignIn extends Component {
     }
     return (
       <section className="SignIn">
-        <h2> Login </h2>
         <p>{this.props.errorMessage}</p>
         <form onSubmit={this.handleSubmit}>
           <div className="SignIn-item">
-            <label for="email">
-              email
-            </label>
-            <input onChange={this.handleInputChange} name='email' type='email'/>
+            <TextField
+               onChange={this.handleInputChange}
+               name="email"
+               hintText="Email"
+               floatingLabelText="Email"
+               type="email"
+             />
           </div>
           <div className="SignIn-item">
-            <label for="password" >
-              password
-            </label>
-            <input onChange={this.handleInputChange} name='password' type='password'/>
+            <TextField
+               onChange={this.handleInputChange}
+               name="password"
+               hintText="Password"
+               floatingLabelText="Password"
+               type="password"
+             />
           </div>
           <div className="SignIn-item">
-            <input className="SignIn-button" type="submit" value="submit" />
+            {/* <input className="SignIn-button" type="submit" value="submit" /> */}
+            <RaisedButton type="submit" label="login" className="SignIn-submit" primary={true} />
           </div>
         </form>
       </section>

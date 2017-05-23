@@ -2,28 +2,24 @@ import React from 'react'
 import './AppHeader.css'
 import 'font-awesome/css/font-awesome.css'
 import { connect } from 'react-redux'
+import AppBar from 'material-ui/AppBar'
+import TextField from 'material-ui/TextField'
 
 
 function AppHeader({hasGroup, title}){
   const headerTitle = title || "oleApp"
-  let backButton = null
+  let backIcon = null
+  let backCallback = null
   if(hasGroup){
-    backButton = (
-      <a onClick={()=> window.history.back()}>
-        <i className="fa fa-lg fa-chevron-left"></i>
-      </a>
-    )
+    backIcon = "fa fa-lg fa-chevron-left"
+    backCallback = ()=> window.history.back()
   }
   return (
-    <header className="AppHeader">
-      <nav>
-        {backButton}
-      </nav>
-
-      <h1> {headerTitle} </h1>
-      <div className="menu"></div>
-
-    </header>
+    <AppBar
+      iconClassNameLeft={ backIcon }
+      title={title}
+      onLeftIconButtonTouchTap = {backCallback}
+    />
   )
 }
 
