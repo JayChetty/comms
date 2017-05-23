@@ -8,7 +8,7 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import './Event.css'
 
 function Event({dispatch, event, group, submission, updateSubmission, submissions, currentUserId}){
-  console.log("Event group", group)
+  console.log("Event groups", group)
   const forms = Object.keys(group.members).map((memberId)=>{
     const member = group.members[memberId]
     const submission = submissions[memberId]
