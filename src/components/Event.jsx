@@ -12,7 +12,7 @@ function Event({dispatch, event, group, submission, updateSubmission, submission
     const submission = submissions[memberId]
     const isCurrentUser = currentUserId === memberId
     return (
-    <div className="Event-usercard">
+    <div className="Event-usercard" key={memberId}>
       <h3>{member.displayName}</h3>
       <Form
         key={memberId}
