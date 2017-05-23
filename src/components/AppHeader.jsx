@@ -7,7 +7,7 @@ import AppBar from 'material-ui/AppBar'
 
 
 function AppHeader({hasGroup, title}){
-  const headerTitle = title || "oleApp"
+  const headerTitle = title || "oléApp"
   let icon = "fa fa-lg fa-heart-o"
   let backCallback = null
   if(hasGroup){
@@ -29,7 +29,7 @@ const mapStateToProps = (state, router) =>{
   if(!state.groups || !state.events || locationParts.length <= 2){
     return{
       hasGroup: false,
-      title: "oleApp"
+      title: "oléApp"
     }
   }
   const hasGroup = true
