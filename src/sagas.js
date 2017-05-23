@@ -7,7 +7,8 @@ import {
   firebaseUpdateCounter,
   firebaseGetCounterValue,
   firebaseCounterListener,
-  firebaseEventsListener
+  firebaseEventsListener,
+  firebaseSignOut
 } from './firebase_helpers'
 
 //(Intuition) These yield out Promises to the watchers that then in turn feedback to them the resolved result
@@ -17,6 +18,15 @@ export function* signInSubmit( action ){
     yield put({ type: "SET_AUTH_ERROR", error: response.error.message })
   }else{
     yield put({ type: "ACTIVATE_USER", user: response.user })
+  }
+}
+
+export function* signOutSubmit( action ){
+  let response = yield call( firebaseSignOut )
+  if(response.error){
+    yield put({ type: "SET_AUTH_ERROR", error: response.error.message })
+  }else{
+    yield put({ type: "ACTIVATE_USER", user: null })
   }
 }
 
@@ -65,6 +75,10 @@ export function* watchSignInSubmit() {
   yield takeEvery('SIGNIN_SUBMIT', signInSubmit)
 }
 
+export function* watchSignOutSubmit() {
+  yield takeEvery('SIGNOUT_SUBMIT', signOutSubmit)
+}
+
 export function* watchGetCurrentUser() {
   yield takeEvery('GET_CURRENT_USER', getCurrentUser)
 }
@@ -84,6 +98,7 @@ export default function* rootSaga() {
     watchSignInSubmit(),
     watchGetCurrentUser(),
     watchActivateUser(),
+    watchSignOutSubmit(),
     // watchUpdateSubmission()
   ]
 }

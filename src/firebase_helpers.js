@@ -75,6 +75,16 @@ export function firebaseSignin(userDetails){
   })
 }
 
+export function firebaseSignOut(){
+  return window.firebase.auth().signOut()
+  .then( () => {
+    return true
+  })
+  .catch( (error) =>{
+    return { error }
+  })
+}
+
 
 
 // export function firebaseSignUp(userDetails){
