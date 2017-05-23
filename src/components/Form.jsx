@@ -41,6 +41,7 @@ export default function Form( { form, submission, onFormChange, isCurrentUser } 
            floatingLabelText={formKey}
            type="number"
            value={dataSource[formKey]}
+           disabled={!isCurrentUser}
         />
       </div>
     )
