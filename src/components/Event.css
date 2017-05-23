@@ -1,0 +1,14 @@
+.Event{
+  display:flex;
+  flex-direction:column;
+}
+h3{
+  text-align: center;
+}
+.Event-usercard{
+  flex:1;
+  background-color: gray;
+  border: 1px black solid;
+  margin: 10px;
+  border-radius: 5px;
+}

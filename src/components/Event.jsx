@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Form from './Form'
 import { firebaseUpdateValue } from '../firebase_helpers'
+import AppHeader from './AppHeader'
+import './Event.css'
 
 function Event({dispatch, event, group, submission, updateSubmission, submissions, currentUserId}){
   console.log("Event group", group)
@@ -10,7 +12,7 @@ function Event({dispatch, event, group, submission, updateSubmission, submission
     const submission = submissions[memberId]
     const isCurrentUser = currentUserId === memberId
     return (
-    <div>
+    <div className="Event-usercard">
       <h3>{member.displayName}</h3>
       <Form
         key={memberId}
@@ -24,9 +26,11 @@ function Event({dispatch, event, group, submission, updateSubmission, submission
   })
 
   return (
-    <div className="App">
-      {event.name}
-      {forms}
+    <div>
+      <AppHeader title={event.name}/>
+      <div className="Event">
+        {forms}
+      </div>
     </div>
   );
 }
