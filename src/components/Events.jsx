@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import { connect } from 'react-redux'
+import './Events.css'
 import {
   Link,
 } from 'react-router-dom'
@@ -14,7 +15,7 @@ export default function Events( { group, events, groupId } ) {
   })
 
   return (
-    <div className="App">
+    <div className="Events">
       <ul>
         { eventListItems }
       </ul>

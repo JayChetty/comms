@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Events from './Events'
+import AppHeader from './AppHeader.jsx'
 
 function Group({group, events, id}){
   console.log("Group id", id)
@@ -11,9 +12,11 @@ function Group({group, events, id}){
   })
   console.log("groupEvents", groupEvents)
   return (
-    <div className="App">
-      <h2> {group.name} </h2>
-      <Events group={group} groupId={id} events={groupEvents}> </Events>
+    <div>
+      <AppHeader title={group.name} />
+      <div className="Group">
+        <Events group={group} groupId={id} events={groupEvents}> </Events>
+      </div>
     </div>
   );
 }
