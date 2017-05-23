@@ -10,18 +10,13 @@ import {List, ListItem} from 'material-ui/List';
 import {
   Link,
 } from 'react-router-dom'
+import LinearProgress from 'material-ui/LinearProgress';
 
-
-function Groups(props){
-  return(
-    <div>Hello</div>
-  )
-}
 
 function Groups( props ) {
   // console.log("rendering groups props", props)
   if(!props.groups){
-    return ( <div> Fetching...</div> )
+    return ( <LinearProgress mode="indeterminate" /> )
   }
   // console.log("rendering groups props", props)
   const groups = props.groups
