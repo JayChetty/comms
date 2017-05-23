@@ -11,14 +11,12 @@ export default function Events( { group, events, groupId } ) {
   console.log("rendering events prop events", events, group, groupId)
   // const events = props.events
   const eventListItems = events.map((event)=>{
-    return ( <li key={event.id}> <Link to={`${groupId}/events/${event.id}`}> {event.name} </Link> </li> )
+    return ( <div className="Events-item" key={event.id}> <Link className="Events-link" to={`${groupId}/events/${event.id}`}> {event.name} </Link> </div> )
   })
 
   return (
     <div className="Events">
-      <ul>
-        { eventListItems }
-      </ul>
+      { eventListItems }
     </div>
   );
 }
