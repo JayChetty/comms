@@ -3,20 +3,20 @@ import './AppHeader.css'
 import 'font-awesome/css/font-awesome.css'
 import { connect } from 'react-redux'
 import AppBar from 'material-ui/AppBar'
-import TextField from 'material-ui/TextField'
+
 
 
 function AppHeader({hasGroup, title}){
   const headerTitle = title || "oleApp"
-  let backIcon = null
+  let icon = "fa fa-lg fa-heart-o"
   let backCallback = null
   if(hasGroup){
-    backIcon = "fa fa-lg fa-chevron-left"
+    icon = "fa fa-lg fa-chevron-left"
     backCallback = ()=> window.history.back()
   }
   return (
     <AppBar
-      iconClassNameLeft={ backIcon }
+      iconClassNameLeft={ icon }
       title={title}
       onLeftIconButtonTouchTap = {backCallback}
     />

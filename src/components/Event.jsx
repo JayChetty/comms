@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import Form from './Form'
 import { firebaseUpdateValue } from '../firebase_helpers'
 import AppHeader from './AppHeader'
+import Paper from 'material-ui/Paper';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import './Event.css'
 
 function Event({dispatch, event, group, submission, updateSubmission, submissions, currentUserId}){
@@ -12,16 +14,22 @@ function Event({dispatch, event, group, submission, updateSubmission, submission
     const submission = submissions[memberId]
     const isCurrentUser = currentUserId === memberId
     return (
-    <div className="Event-usercard" key={memberId}>
-      <h3>{member.displayName}</h3>
-      <Form
-        key={memberId}
-        form={event.form}
-        submission={submission}
-        onFormChange={updateSubmission}
-        isCurrentUser={isCurrentUser}>
-      </Form>
-    </div>
+    // <div className="Event-usercard" key={memberId}>
+    <Card  zDepth={4} key={memberId} style={{marginBottom:'10px'}}>
+      <CardHeader
+        title={member.displayName}
+      />
+      <CardText>
+        <Form
+          key={memberId}
+          form={event.form}
+          submission={submission}
+          onFormChange={updateSubmission}
+          isCurrentUser={isCurrentUser}>
+        </Form>
+      </CardText>
+    </Card>
+
   )
   })
 

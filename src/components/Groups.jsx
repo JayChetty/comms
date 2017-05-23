@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import { connect } from 'react-redux'
 import AppHeader from './AppHeader'
 import './Groups.css'
+import Divider from 'material-ui/Divider';
+
+import {List, ListItem} from 'material-ui/List';
 
 import {
   Link,
@@ -23,12 +26,17 @@ function Groups( props ) {
   // console.log("rendering groups props", props)
   const groups = props.groups
   const groupListItems = Object.keys(groups).map((key)=>{
-    return ( <div className="Groups-item" key={key}> <Link className="Groups-link" to={`/groups/${key}`}> {groups[key].name} </Link> </div> )
+    return (
+      <div>
+        <ListItem  primaryText={groups[key].name} key={key} containerElement={<Link to={`/groups/${key}`}/>}/>
+        <Divider/>
+      </div>
+    )
   })
   return (
-    <div className="Groups">
+     <List>
       { groupListItems }
-    </div>
+    </List>
   );
 }
 

@@ -5,18 +5,25 @@ import './Events.css'
 import {
   Link,
 } from 'react-router-dom'
+import {List, ListItem} from 'material-ui/List';
+import Divider from 'material-ui/Divider';
 
 
 export default function Events( { group, events, groupId } ) {
   // const events = props.events
   const eventListItems = events.map((event)=>{
-    return ( <div className="Events-item" key={event.id}> <Link className="Events-link" to={`${groupId}/events/${event.id}`}> {event.name} </Link> </div> )
+    return (
+      <div>
+      <ListItem primaryText={event.name} key={event.id} containerElement={<Link to={`${groupId}/events/${event.id}`}/>} />
+      <Divider/>
+      </div>
+    )
   })
 
   return (
-    <div className="Events">
+    <List>
       { eventListItems }
-    </div>
+    </List>
   );
 }
 
