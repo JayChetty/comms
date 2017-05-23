@@ -3,10 +3,23 @@
   background-color: gray;
   text-align: center;
   padding-top:15px;
+  display: flex;
+  flex-direction:row;
 }
 
+nav{
+  flex:1
+}
+
+i{
+  margin-top:7px;
+}
 
 h1{
   font-size: 25px;
   margin-top:0px;
+  flex:5
+}
+.menu{
+  flex:1
 }

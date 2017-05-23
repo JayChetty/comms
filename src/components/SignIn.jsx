@@ -33,29 +33,26 @@ class SignIn extends Component {
       return <Redirect to="/groups"/>
     }
     return (
-      <div>
-        <AppHeader/>
-        <section className="SignIn">
-          <p>{this.props.errorMessage}</p>
-          <form onSubmit={this.handleSubmit}>
-            <div className="SignIn-item">
-              <label for="email">
-                email
-              </label>
-              <input onChange={this.handleInputChange} name='email' type='email'/>
-            </div>
-            <div className="SignIn-item">
-              <label for="password" >
-                password
-              </label>
-              <input onChange={this.handleInputChange} name='password' type='password'/>
-            </div>
-            <div className="SignIn-item">
-              <input className="SignIn-button" type="submit" value="submit" />
-            </div>
-          </form>
-        </section>
-      </div>
+      <section className="SignIn">
+        <p>{this.props.errorMessage}</p>
+        <form onSubmit={this.handleSubmit}>
+          <div className="SignIn-item">
+            <label for="email">
+              email
+            </label>
+            <input onChange={this.handleInputChange} name='email' type='email'/>
+          </div>
+          <div className="SignIn-item">
+            <label for="password" >
+              password
+            </label>
+            <input onChange={this.handleInputChange} name='password' type='password'/>
+          </div>
+          <div className="SignIn-item">
+            <input className="SignIn-button" type="submit" value="submit" />
+          </div>
+        </form>
+      </section>
     );
   }
 }

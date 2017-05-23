@@ -4,6 +4,7 @@ import registerServiceWorker from './registerServiceWorker';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import AppHeader from './components/AppHeader'
 import SignIn from './components/SignIn';
 import Groups from './components/Groups';
 import Group from './components/Group';
@@ -87,9 +88,10 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div>
+        <Route path='/' component={AppHeader}/>
         <PrivateRoute exact path='/' component={Groups}/>
-        <PrivateRoute exact path='/groups/:groupId' component={Group}/>
         <PrivateRoute exact path='/groups/:groupId/events/:eventId' component={Event}/>
+        <PrivateRoute exact path='/groups/:groupId' component={Group}/>
         <PrivateRoute exact path='/groups' component={Groups}/>
         <Route path='/signin' component={SignIn}/>
       </div>

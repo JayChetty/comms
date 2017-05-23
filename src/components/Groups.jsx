@@ -16,21 +16,18 @@ function Groups(props){
 }
 
 function Groups( props ) {
-  console.log("rendering groups props", props)
+  // console.log("rendering groups props", props)
   if(!props.groups){
     return ( <div> Fetching...</div> )
   }
-  console.log("rendering groups props", props)
+  // console.log("rendering groups props", props)
   const groups = props.groups
   const groupListItems = Object.keys(groups).map((key)=>{
     return ( <div className="Groups-item" key={key}> <Link className="Groups-link" to={`/groups/${key}`}> {groups[key].name} </Link> </div> )
   })
   return (
-    <div>
-      <AppHeader/>
-      <div className="Groups">
-        { groupListItems }
-      </div>
+    <div className="Groups">
+      { groupListItems }
     </div>
   );
 }

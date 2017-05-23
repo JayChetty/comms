@@ -26,11 +26,8 @@ function Event({dispatch, event, group, submission, updateSubmission, submission
   })
 
   return (
-    <div>
-      <AppHeader title={event.name}/>
-      <div className="Event">
-        {forms}
-      </div>
+    <div className="Event">
+      {forms}
     </div>
   );
 }
