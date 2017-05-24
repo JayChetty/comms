@@ -5,7 +5,7 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
 import FontIcon from 'material-ui/FontIcon';
-import {blue300, greenA200} from 'material-ui/styles/colors';
+import {greenA200, amber500, blueGrey100, brown400} from 'material-ui/styles/colors';
 // import logo from './logo.svg';
 
 // import { connect } from 'react-redux'
@@ -74,9 +74,23 @@ export default function Form( { form, submission, onFormChange, isCurrentUser, m
   }
 
   if(event.result){
+    let color = null
+    switch (position) {
+      case 1:
+        color = amber500
+        break;
+      case 2:
+        color = blueGrey100
+        break;
+      case 3:
+        color = brown400
+        break;
+      default:
+        color = null
+    }
     infoBox = (
       <Chip>
-        <Avatar size={32}>{ position }</Avatar>
+        <Avatar size={32} backgroundColor={color}>{ position }</Avatar>
         { `${score} wrong seats` }
       </Chip>
     )
