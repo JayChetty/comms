@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import Form from './Form'
 import { firebaseUpdateValue } from '../firebase_helpers'
 import AppHeader from './AppHeader'
-import Paper from 'material-ui/Paper';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+
 import './Event.css'
 
 function Event({dispatch, event, group, submission, updateSubmission, submissions, currentUserId}){
@@ -15,20 +14,22 @@ function Event({dispatch, event, group, submission, updateSubmission, submission
     const isCurrentUser = currentUserId === memberId
     return (
     // <div className="Event-usercard" key={memberId}>
-    <Card  zDepth={4} key={memberId} style={{marginBottom:'10px'}}>
-      <CardHeader
-        title={member.displayName}
-      />
-      <CardText>
+    // <Card  zDepth={4} key={memberId} style={{marginBottom:'10px'}}>
+    //   <CardHeader
+    //     title={member.displayName}
+    //   />
+    //   <CardText>
         <Form
           key={memberId}
           form={event.form}
           submission={submission}
           onFormChange={updateSubmission}
+          member={member}
+          memberId={memberId}
           isCurrentUser={isCurrentUser}>
         </Form>
-      </CardText>
-    </Card>
+    //   </CardText>
+    // </Card>
 
   )
   })
@@ -51,7 +52,7 @@ const mapStateToProps = (state, {match}) =>{
   const updateSubmission = (value, formCategory)=>{
     console.log("updating submission", value, formCategory)
     const routeString = `/groups/${match.params.groupId}/events/${match.params.eventId}/submissions/${state.user.uid}/${formCategory}/`
-    firebaseUpdateValue(routeString, value)
+    firebaseUpdateValue(routeString, Number(value))
   }
 
   return {

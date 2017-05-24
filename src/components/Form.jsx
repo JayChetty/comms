@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import './Form.css'
 import TextField from 'material-ui/TextField';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Chip from 'material-ui/Chip';
+import Avatar from 'material-ui/Avatar';
+import FontIcon from 'material-ui/FontIcon';
+import {blue300, greenA200} from 'material-ui/styles/colors';
 // import logo from './logo.svg';
 
 // import { connect } from 'react-redux'
@@ -9,7 +14,7 @@ import TextField from 'material-ui/TextField';
 // } from 'react-router-dom'
 
 
-export default function Form( { form, submission, onFormChange, isCurrentUser } ) {
+export default function Form( { form, submission, onFormChange, isCurrentUser, member, memberId} ) {
 
   if(!submission && isCurrentUser){//setup form from default
     Object.keys(form.default).forEach((formKey)=>{
@@ -47,9 +52,30 @@ export default function Form( { form, submission, onFormChange, isCurrentUser } 
     )
   })
 
+  const sum = Object.values( dataSource ).reduce( (acc,curr)=> acc + curr, 0 )
+  const remaining = 650 - sum
+
+  let infoBox = <Avatar size={32} backgroundColor={greenA200}>{ sum }</Avatar>
+  if(remaining != 0){
+    const adviceText = remaining > 0 ? 'Add' : 'Remove';
+    infoBox = (
+    <Chip>
+      <Avatar size={32}>{ sum }</Avatar>
+      { `${adviceText} ${ Math.abs(remaining) } seats`}
+    </Chip>)
+  }
+
   return (
-    <form>
-      { formListItems }
-    </form>
+    <Card  zDepth={4} key={memberId} style={{marginBottom:'10px'}}>
+      <CardHeader
+        title={member.displayName}
+      />
+      <CardText>
+        {infoBox}
+        <form>
+          { formListItems }
+        </form>
+      </CardText>
+    </Card>
   );
 }
