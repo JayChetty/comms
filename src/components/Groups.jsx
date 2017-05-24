@@ -29,7 +29,7 @@ function Groups( props ) {
   const groups = props.groups
   const groupListItems = Object.keys(groups).map((key)=>{
     return (
-      <div>
+      <div key={key}>
         <ListItem  primaryText={groups[key].name} key={key} containerElement={<Link to={`/groups/${key}`}/>}/>
         <Divider/>
       </div>

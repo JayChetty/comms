@@ -14,8 +14,8 @@ import {blue300, greenA200} from 'material-ui/styles/colors';
 // } from 'react-router-dom'
 
 
-export default function Form( { form, submission, onFormChange, isCurrentUser, member, memberId} ) {
-
+export default function Form( { form, submission, onFormChange, isCurrentUser, member, memberId, event, score, position} ) {
+  console.log("Form event", event)
   if(!submission && isCurrentUser){//setup form from default
     Object.keys(form.default).forEach((formKey)=>{
       onFormChange(form.default[formKey], formKey)
@@ -38,25 +38,26 @@ export default function Form( { form, submission, onFormChange, isCurrentUser, m
       //   <label className="Form-label" key={formKey} for={formKey}> {formKey}</label>
       //   { input }
       // </div>
-      <div className="Form-listitem">
-        <TextField
+      <div className="Form-listitem" key={formKey}>
+        <TextField     
            onChange={ (event)=>onFormChange(event.target.value, formKey) }
            name={formKey}
            hintText={formKey}
            floatingLabelText={formKey}
            type="number"
            value={dataSource[formKey]}
-           disabled={!isCurrentUser}
+           disabled={!isCurrentUser || event.status != "open"}
         />
       </div>
     )
   })
 
-  const sum = Object.values( dataSource ).reduce( (acc,curr)=> acc + curr, 0 )
+  const sum = Object.values( dataSource ).reduce( (acc,curr)=> acc + Number(curr), 0 )
   const remaining = 650 - sum
 
   let infoBox = <Avatar size={32} backgroundColor={greenA200}>{ sum }</Avatar>
-  if(remaining != 0){
+
+  if(!event.result && remaining != 0){
     const adviceText = remaining > 0 ? 'Add' : 'Remove';
     infoBox = (
     <Chip>
@@ -64,6 +65,17 @@ export default function Form( { form, submission, onFormChange, isCurrentUser, m
       { `${adviceText} ${ Math.abs(remaining) } seats`}
     </Chip>)
   }
+
+  if(event.result){
+    infoBox = (
+      <Chip>
+        <Avatar size={32}>{ position }</Avatar>
+        { `${score} wrong seats` }
+      </Chip>
+    )
+  }
+
+
 
   return (
     <Card  zDepth={4} key={memberId} style={{marginBottom:'10px'}}>

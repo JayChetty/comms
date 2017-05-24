@@ -5,12 +5,29 @@ import { firebaseUpdateValue } from '../firebase_helpers'
 import AppHeader from './AppHeader'
 
 import './Event.css'
+function error(submission, result){
+  return Object.keys( submission ).reduce( (acc,key)=> acc + Math.abs( result[key] - submission[key] ), 0 )
+}
 
 function Event({dispatch, event, group, submission, updateSubmission, submissions, currentUserId}){
-  console.log("Event groups", group)
-  const forms = Object.keys(group.members).map((memberId)=>{
+
+  let scores = {}
+  let sortedMemberKeys = Object.keys(group.members)
+  if(event.result){
+    console.log("Event scores", scores)
+    Object.keys(group.members).forEach((key)=>{
+      const memberSubmission = submissions[key] || event.form.default
+      scores[key] = error(memberSubmission, event.result)
+    })
+    sortedMemberKeys = sortedMemberKeys.sort((k1,k2) =>{
+      return scores[k1] > scores[k2]
+    })
+  }
+
+  const forms = sortedMemberKeys.map((memberId, index)=>{
     const member = group.members[memberId]
     const submission = submissions[memberId]
+    // const dataSource = submission ||
     const isCurrentUser = currentUserId === memberId
     return (
     // <div className="Event-usercard" key={memberId}>
@@ -26,7 +43,11 @@ function Event({dispatch, event, group, submission, updateSubmission, submission
           onFormChange={updateSubmission}
           member={member}
           memberId={memberId}
-          isCurrentUser={isCurrentUser}>
+          isCurrentUser={isCurrentUser}
+          event={event}
+          score={scores[memberId]}
+          position={index + 1}
+          >
         </Form>
     //   </CardText>
     // </Card>

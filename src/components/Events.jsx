@@ -13,9 +13,9 @@ export default function Events( { group, events, groupId } ) {
   // const events = props.events
   const eventListItems = events.map((event)=>{
     return (
-      <div>
-      <ListItem primaryText={event.name} key={event.id} containerElement={<Link to={`${groupId}/events/${event.id}`}/>} />
-      <Divider/>
+      <div key={event.id}>
+        <ListItem primaryText={event.name}  containerElement={<Link to={`${groupId}/events/${event.id}`}/>} />
+        <Divider/>
       </div>
     )
   })
