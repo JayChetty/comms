@@ -64,7 +64,7 @@ const mapStateToProps = (state, router) =>{
       break;
     default:
       hasGroup = false,
-      title = "oléAppaaa"
+      title = "oléApp"
   }
 
   return{

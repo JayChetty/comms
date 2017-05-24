@@ -9,6 +9,7 @@ import SignIn from './components/SignIn';
 import Groups from './components/Groups';
 import Group from './components/Group';
 import Event from './components/Event';
+import Chat from './components/Chat';
 
 import reducer from './reducers'
 import './index.css';
@@ -67,6 +68,10 @@ function listenToDBChanges(past){
       console.log("events updated", newEvents)
       return store.dispatch({type: "SET_EVENTS",events: newEvents})
     })
+    firebaseEventsListener(`users/${user.uid}`, (userDetails)=>{
+      console.log("user detailsevents updated", userDetails)
+      return store.dispatch({type: "SET_USER_DETAILS", userDetails: userDetails})
+    })
   }
 }
 
@@ -96,6 +101,7 @@ ReactDOM.render(
             <PrivateRoute exact path='/' component={Groups}/>
             <PrivateRoute exact path='/groups/:groupId/events/:eventId' component={Event}/>
             <PrivateRoute exact path='/groups/:groupId/events' component={Group}/>
+            <PrivateRoute exact path='/groups/:groupId/chat' component={Chat}/>
             <PrivateRoute exact path='/groups' component={Groups}/>
             <Route path='/signin' component={SignIn}/>
           </div>

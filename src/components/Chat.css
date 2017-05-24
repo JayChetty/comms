@@ -1,0 +1,13 @@
+.Chat-container{
+  display:flex;
+  flex-direction:column;
+  height:100vh;
+}
+
+.Chat-main{
+  flex:8;
+}
+
+.Chat-input{
+  flex:2;
+}

@@ -44,6 +44,21 @@ export function firebaseEventsListener(data, callback){
 //   });
 // }
 
+export function firebaseAddMessage(userId, groupId, message){
+  const messageData = {
+    userId,
+    message
+  }
+  const messageRoute = `/groups/${groupId}/messages`
+  const newMessageKey = window.firebase.database().ref().child(messageRoute).push().key;
+  let database = window.firebase.database();
+  return database.ref(`${messageRoute}/${newMessageKey}`).set(messageData)
+  .then((feedback)=>{
+    console.log("feedback from promise", feedback)
+    return feedback
+  });
+}
+
 export function firebaseUpdateValue(route, value){
   let database = window.firebase.database();
   console.log("firebaseUpdateValue", route)

@@ -4,6 +4,7 @@ import Events from './Events'
 import AppHeader from './AppHeader.jsx'
 import GroupNav from './GroupNav.jsx'
 
+
 function Group({group, events, id, history}){
   // console.log("Group id", id)
   function gotoChat(){
