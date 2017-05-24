@@ -23,8 +23,10 @@ export default function Form( { form, submission, onFormChange, isCurrentUser, m
   }
 
   const dataSource = submission || form.default
+
+  const keysInOrder = ["conservatives", "labour", "snp", "liberals", "other"]
   // // const events = props.events
-  const formListItems = Object.keys(dataSource).map((formKey)=>{
+  const formListItems = keysInOrder.map((formKey)=>{
     // return ( <li key={formKey}> { formKey } </li> )
     // dataSource[formKey]
     // let input = null
@@ -33,12 +35,12 @@ export default function Form( { form, submission, onFormChange, isCurrentUser, m
     // }else{
     //   input = <input readOnly value={dataSource[formKey]} name={formKey} type='number' className="Form-input"/>
     // }
-    let label = formKey
+    let label = form.labels[formKey]
     if(event.result){
       const actual = event.result[formKey]
       const error = dataSource[formKey] - actual
       const sign = error >= 0 ? "+" : "-"
-      label = `${formKey} ${actual}( ${sign}${Math.abs(error)})`
+      label = `${label} ${actual}( ${sign}${Math.abs(error)})`
     }
     return(
       // <div className="Form-listitem">
