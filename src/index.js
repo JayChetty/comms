@@ -95,7 +95,7 @@ ReactDOM.render(
             <Route path='/' component={AppHeader}/>
             <PrivateRoute exact path='/' component={Groups}/>
             <PrivateRoute exact path='/groups/:groupId/events/:eventId' component={Event}/>
-            <PrivateRoute exact path='/groups/:groupId' component={Group}/>
+            <PrivateRoute exact path='/groups/:groupId/events' component={Group}/>
             <PrivateRoute exact path='/groups' component={Groups}/>
             <Route path='/signin' component={SignIn}/>
           </div>

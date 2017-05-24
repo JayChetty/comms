@@ -2,29 +2,38 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Events from './Events'
 import AppHeader from './AppHeader.jsx'
+import GroupNav from './GroupNav.jsx'
 
-function Group({group, events, id}){
+function Group({group, events, id, history}){
   // console.log("Group id", id)
+  function gotoChat(){
+    history.push(`/groups/${id}/chat`)
+  }
+
   const groupEvents = Object.keys(group.events).map( eventKey => {
     const event = events[eventKey]
     event.id = eventKey
     return event
   })
   // console.log("groupEvents", groupEvents)
+  console.log("group history", history)
   return (
     <div className="Group">
       <Events group={group} groupId={id} events={groupEvents}> </Events>
+      <GroupNav groupId={id} onChatClick={gotoChat}/>
     </div>
 
   );
 }
 
-const mapStateToProps = (state, {match}) =>{
-  const group = state.groups[match.params.groupId]
+const mapStateToProps = (state, router) =>{
+  console.log("router", router)
+  const history = router.history
+  const group = state.groups[router.match.params.groupId]
   const events = state.events
-  const id = match.params.groupId
+  const id = router.match.params.groupId
   // console.log("id", id)
-  return {group, events, id}
+  return {group, events, id, history}
 }
 
 const mapDispatchToProps = (dispatch)=>{

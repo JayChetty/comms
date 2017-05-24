@@ -12,6 +12,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 function AppHeader({hasGroup, title, user, dispatch}){
   let icon = "fa fa-lg fa-heart-o"
   let backCallback = null
+  console.log("has group", hasGroup)
   if(hasGroup){
     icon = "fa fa-lg fa-chevron-left"
     backCallback = ()=> window.history.back()
@@ -43,6 +44,7 @@ function AppHeader({hasGroup, title, user, dispatch}){
 
 const mapStateToProps = (state, router) =>{
   const locationParts = router.location.pathname.split("/")
+  console.log("header", state)
   if(!state.groups || !state.events || !state.user){
     return{
       hasGroup: false,
@@ -57,12 +59,12 @@ const mapStateToProps = (state, router) =>{
     case 5:
       title = state.events[ locationParts[4] ].name
       break;
-    case 3:
+    case 4:
       title = state.groups[ locationParts[2] ].name
       break;
     default:
       hasGroup = false,
-      title = "oléApp"
+      title = "oléAppaaa"
   }
 
   return{

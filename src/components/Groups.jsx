@@ -10,9 +10,7 @@ import {
 
 import {List, ListItem} from 'material-ui/List';
 
-import {
-  Link,
-} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import LinearProgress from 'material-ui/LinearProgress';
 
 
@@ -30,7 +28,7 @@ function Groups( props ) {
   const groupListItems = Object.keys(groups).map((key)=>{
     return (
       <div key={key}>
-        <ListItem  primaryText={groups[key].name} key={key} containerElement={<Link to={`/groups/${key}`}/>}/>
+        <ListItem  primaryText={groups[key].name} key={key} containerElement={<Link to={`/groups/${key}/events`}/>}/>
         <Divider/>
       </div>
     )
