@@ -4,7 +4,7 @@ form{
   align-items: center;
 }
 .Form-listitem{
-  /*display:flex;
-  flex-direction:row;*/
-  /*justify-content: center;*/
+  display:flex;
+  flex-direction:row;
+  justify-content: center;
 }

@@ -33,17 +33,24 @@ export default function Form( { form, submission, onFormChange, isCurrentUser, m
     // }else{
     //   input = <input readOnly value={dataSource[formKey]} name={formKey} type='number' className="Form-input"/>
     // }
+    let label = formKey
+    if(event.result){
+      const actual = event.result[formKey]
+      const error = dataSource[formKey] - actual
+      const sign = error >= 0 ? "+" : "-"
+      label = `${formKey} ${actual}( ${sign}${Math.abs(error)})`
+    }
     return(
       // <div className="Form-listitem">
       //   <label className="Form-label" key={formKey} for={formKey}> {formKey}</label>
       //   { input }
       // </div>
       <div className="Form-listitem" key={formKey}>
-        <TextField     
+        <TextField
            onChange={ (event)=>onFormChange(event.target.value, formKey) }
            name={formKey}
            hintText={formKey}
-           floatingLabelText={formKey}
+           floatingLabelText={label}
            type="number"
            value={dataSource[formKey]}
            disabled={!isCurrentUser || event.status != "open"}

@@ -14,7 +14,6 @@ function Event({dispatch, event, group, submission, updateSubmission, submission
   let scores = {}
   let sortedMemberKeys = Object.keys(group.members)
   if(event.result){
-    console.log("Event scores", scores)
     Object.keys(group.members).forEach((key)=>{
       const memberSubmission = submissions[key] || event.form.default
       scores[key] = error(memberSubmission, event.result)
