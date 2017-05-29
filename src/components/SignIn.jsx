@@ -37,7 +37,6 @@ class SignIn extends Component {
       <section className="SignIn">
         <p>{this.props.errorMessage}</p>
         <form onSubmit={this.handleSubmit}>
-          <div className="SignIn-item">
             <TextField
                onChange={this.handleInputChange}
                name="email"
@@ -45,8 +44,6 @@ class SignIn extends Component {
                floatingLabelText="Email"
                type="email"
              />
-          </div>
-          <div className="SignIn-item">
             <TextField
                onChange={this.handleInputChange}
                name="password"
@@ -54,11 +51,7 @@ class SignIn extends Component {
                floatingLabelText="Password"
                type="password"
              />
-          </div>
-          <div className="SignIn-item">
-            {/* <input className="SignIn-button" type="submit" value="submit" /> */}
-            <RaisedButton type="submit" label="login" className="SignIn-submit" primary={true} />
-          </div>
+           <RaisedButton type="submit" label="login" className="SignIn-submit" primary={true} />
         </form>
       </section>
     );

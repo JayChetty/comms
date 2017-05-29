@@ -8,14 +8,7 @@
   align-items: center;
 }
 
-.SignIn-item{
-  display: flex;
-  text-align: center;
-  flex-direction: column;
-  /*background-color: blue;*/
-  justify-content: center;
-  flex: 1;
-}
+
 
 .SignIn-submit{
   margin-top: 30px;

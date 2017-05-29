@@ -34,7 +34,6 @@ export function* signOutSubmit( action ){
 //in here.
 export function* getCurrentUser(){
     let currentUser = yield call( firebaseGetCurrentUser )
-    console.log("sagas trying to get current user", currentUser)
     if( currentUser ){
       yield put({ type: "ACTIVATE_USER", user: currentUser })
     }
