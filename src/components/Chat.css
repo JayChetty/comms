@@ -1,11 +1,23 @@
 .Chat-container{
   display:flex;
   flex-direction:column;
-  height:100vh;
+  height:90vh;
+  justify-content: flex-end;
 }
 
 .Chat-main{
   flex:8;
+}
+
+.Chat-item{
+  display:flex;
+  flex-direction:column;
+  align-items: flex-start;
+}
+
+.Chat-item-name{
+  font-weight: bold;
+  color: gray;
 }
 
 .Chat-input{

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
-import FloatingActionButton from 'material-ui/FloatingActionButton';
+
 import { firebaseAddMessage, firebaseUpdateValue } from '../firebase_helpers'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 
@@ -27,16 +28,45 @@ function Chat(props){
   const group = props.groups[groupId]
   const messageKeys = Object.keys(group.messages)
 
+  const messageStyle = {
+    width: '75%',
+    padding: '10px',
+    margin: '10px'
+  }
+
+  const userStyle = {
+    alignSelf: 'flex-end'
+  }
+
   const messageItems = messageKeys.map((key)=>{
     const message = group.messages[key]
+    const member = group.members[message.userId]
+    const isUser = userId === message.userId
+    const additionalStyles = isUser ? userStyle : {}
+    const style = Object.assign({}, messageStyle, additionalStyles)
+    if(!isUser){
     return (
-      <div key={key}>
-        <Paper zDepth={1}>
+      <div key={key} className="Chat-item">
+        <Paper zDepth={1} style={style}>
+          <div className="Chat-item-name">{ member.displayName }</div>
           { message.message }
         </Paper>
       </div>
-    )
+    )}else{
+      return (
+        <div key={key} className="Chat-item">
+          <Paper zDepth={1} style={style}>
+            { message.message }
+          </Paper>
+        </div>
+      )
+
+    }
   })
+
+  const buttonStyle = {
+    margin: 12
+  }
 
   return(
     <div className="Chat-container">
@@ -52,9 +82,7 @@ function Chat(props){
           rowsMax={10}
           onChange={(ev)=> updateCurrentMessage(ev.target.value, userId, groupId )}
         />
-        <FloatingActionButton onTouchTap={()=>postMessage(message,userId,groupId)}>
-          <ContentAdd />
-        </FloatingActionButton>
+        <RaisedButton label="Post" primary={true} style={buttonStyle} onTouchTap={()=>postMessage(message,userId,groupId) }/>
       </div>
     </div>
   )
