@@ -33,7 +33,20 @@ import {
   Redirect
 } from 'react-router-dom'
 
+import * as firebase from 'firebase';
 injectTapEventPlugin()
+
+let config = {
+  apiKey: "AIzaSyDc4DpJLeK4w4ULp81hy-k3cXrR-1TWho8",
+  authDomain: "comms-a2118.firebaseapp.com",
+  databaseURL: "https://comms-a2118.firebaseio.com",
+  projectId: "comms-a2118",
+  storageBucket: "comms-a2118.appspot.com",
+  messagingSenderId: "860474046609"
+};
+
+firebase.initializeApp(config);
+window.firebase = firebase
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
