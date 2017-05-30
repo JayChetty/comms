@@ -30,12 +30,6 @@
 
 .Chat-item{
   display:flex;
-  flex-direction:row;
-  align-items: flex-start;
-}
-
-.Chat-item-text{
-  display:flex;
   flex-direction:column;
   align-items: flex-start;
 }

@@ -48,18 +48,15 @@ function Chat(props){
     if(!isUser){
     return (
       <div key={key} className="Chat-item">
-        <Paper zDepth={2} style={{height: '15px', width:'15px'}}/>
-        <div className="Chat-item-text">
-          <Paper zDepth={2} style={style}>
-            <div className="Chat-item-name">{ member.displayName }</div>
-            { message.message }
-          </Paper>
-        </div>
+        <Paper zDepth={1} style={style}>
+          <div className="Chat-item-name">{ member.displayName }</div>
+          { message.message }
+        </Paper>
       </div>
     )}else{
       return (
         <div key={key} className="Chat-item">
-          <Paper zDepth={2} style={style}>
+          <Paper zDepth={1} style={style}>
             { message.message }
           </Paper>
         </div>
