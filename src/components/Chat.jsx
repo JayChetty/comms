@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React,{ Component } from 'react'
+import ReactDOM from 'react-dom';
 import TextField from 'material-ui/TextField'
 
 import { firebaseAddMessage, firebaseUpdateValue } from '../firebase_helpers'
@@ -21,16 +22,28 @@ function postMessage(message, userId, groupId){
   firebaseUpdateValue(`users/${userId}/groups/${groupId}/currentMessage`, "")
 }
 
-function Chat(props){
-  console.log("props", props)
-  const groupId = props.match.params.groupId
-  const message = props.userDetails.groups[groupId].currentMessage
-  const userId = props.user.uid
-  const group = props.groups[groupId]
+class Chat extends React.Component{
+  componentDidMount() {
+    this.scrollToBottom()
+  }
+  componentDidUpdate() {
+    this.scrollToBottom()
+  }
+
+  scrollToBottom(){
+    const node = ReactDOM.findDOMNode(this.messagesEnd);
+    node.scrollIntoView({behavior: "smooth"});
+  }
+
+  render(){
+  const groupId = this.props.match.params.groupId
+  const message = this.props.userDetails.groups[groupId].currentMessage
+  const userId = this.props.user.uid
+  const group = this.props.groups[groupId]
   const messageKeys = Object.keys(group.messages)
 
   const messageStyle = {
-    width: '75%',
+    maxWidth: '75%',
     padding: '10px',
     margin: '10px'
   }
@@ -73,6 +86,9 @@ function Chat(props){
     <div className="Chat-container">
       <div className="Chat-main">
         { messageItems }
+        <div style={ {float:"left", clear: "both"} }
+             ref={(el) => { this.messagesEnd = el; }}>
+        </div>
       </div>
       <div className="Chat-input">
         <TextField
@@ -101,7 +117,7 @@ function Chat(props){
           onTouchTap={()=>postMessage(message,userId,groupId) }/> */}
       </div>
     </div>
-  )
+  )}
 }
 
 const mapStateToProps = (state, router) =>{

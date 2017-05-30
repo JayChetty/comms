@@ -12,7 +12,7 @@
   height:80vh;
   position: fixed;
   bottom: 10vh;
-  overflow: scroll;
+  overflow: auto;
   /*background-color: red;*/
 
 }
