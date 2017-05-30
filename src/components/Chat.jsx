@@ -6,8 +6,9 @@ import ContentAdd from 'material-ui/svg-icons/content/add'
 import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
+import FontIcon from 'material-ui/FontIcon';
 
-
+import IconButton from 'material-ui/IconButton';
 
 import "./Chat.css"
 function updateCurrentMessage(message, userId, groupId){
@@ -47,15 +48,18 @@ function Chat(props){
     if(!isUser){
     return (
       <div key={key} className="Chat-item">
-        <Paper zDepth={1} style={style}>
-          <div className="Chat-item-name">{ member.displayName }</div>
-          { message.message }
-        </Paper>
+        <Paper zDepth={2} style={{height: '15px', width:'15px'}}/>
+        <div className="Chat-item-text">
+          <Paper zDepth={2} style={style}>
+            <div className="Chat-item-name">{ member.displayName }</div>
+            { message.message }
+          </Paper>
+        </div>
       </div>
     )}else{
       return (
         <div key={key} className="Chat-item">
-          <Paper zDepth={1} style={style}>
+          <Paper zDepth={2} style={style}>
             { message.message }
           </Paper>
         </div>
@@ -65,7 +69,7 @@ function Chat(props){
   })
 
   const buttonStyle = {
-    margin: 12
+
   }
 
   return(
@@ -75,6 +79,7 @@ function Chat(props){
       </div>
       <div className="Chat-input">
         <TextField
+          style={{flex: 8, margin:'10px'}}
           hintText="Type a message"
           multiLine={true}
           value={message}
@@ -82,7 +87,21 @@ function Chat(props){
           rowsMax={10}
           onChange={(ev)=> updateCurrentMessage(ev.target.value, userId, groupId )}
         />
-        <RaisedButton label="Post" primary={true} style={buttonStyle} onTouchTap={()=>postMessage(message,userId,groupId) }/>
+        {/* <RaisedButton
+          primary={true}
+          style={buttonStyle}
+          icon={<FontIcon className="fa fa-heart-o" />}
+          onTouchTap={()=>postMessage(message,userId,groupId) }/> */}
+        <IconButton
+          style={{flex: 2, marginTop: '10px'}}
+          iconClassName="fa fa-paper-plane"
+          onTouchTap={()=>postMessage(message,userId,groupId) }
+        />
+        {/* <IconButton
+          primary={true}
+          style={buttonStyle}
+          icon={<FontIcon className="fa fa-heart-o" />}
+          onTouchTap={()=>postMessage(message,userId,groupId) }/> */}
       </div>
     </div>
   )
