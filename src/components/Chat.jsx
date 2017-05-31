@@ -13,7 +13,6 @@ import IconButton from 'material-ui/IconButton';
 
 import "./Chat.css"
 function updateCurrentMessage(message, userId, groupId){
-  console.log("Message", message)
   firebaseUpdateValue(`users/${userId}/groups/${groupId}/currentMessage`, message)
 }
 

@@ -69,7 +69,6 @@ function listenToDBChanges(past){
   if(user && !startedDBListener){
     startedDBListener = true
     firebaseEventsListener(`users/${user.uid}/groups/`, (userGroups)=>{
-      console.log("groups updated", userGroups)
       Object.keys(userGroups).forEach((groupId)=>{
         firebaseEventsListener(`groups/${groupId}`, (group)=>{//TODO check security of this
           return store.dispatch({type: "SET_GROUP", groupId: groupId, group: group})
@@ -78,11 +77,9 @@ function listenToDBChanges(past){
       // return store.dispatch({type: "SET_GROUPS",groups: newGroups})
     })
     firebaseEventsListener("events/", (newEvents)=>{
-      console.log("events updated", newEvents)
       return store.dispatch({type: "SET_EVENTS",events: newEvents})
     })
     firebaseEventsListener(`users/${user.uid}`, (userDetails)=>{
-      console.log("user detailsevents updated", userDetails)
       return store.dispatch({type: "SET_USER_DETAILS", userDetails: userDetails})
     })
   }

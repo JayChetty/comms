@@ -48,7 +48,6 @@ export function* activateUser({ user }){
   //   console.log("value from events listener", groups)
   //   yield put({ type: "SET_GROUPS", groups: groups })
   // })
-  console.log('activating user', user)
   yield put({ type: "SET_USER", user: user })
 
 }

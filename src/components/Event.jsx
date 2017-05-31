@@ -73,7 +73,6 @@ const mapStateToProps = (state, {match}) =>{
   const submission = group.events[match.params.eventId].submissions[state.user.uid]
 
   const updateSubmission = (value, formCategory)=>{
-    console.log("updating submission", value, formCategory)
     const routeString = `/groups/${match.params.groupId}/events/${match.params.eventId}/submissions/${state.user.uid}/${formCategory}/`
     firebaseUpdateValue(routeString, Number(value))
   }

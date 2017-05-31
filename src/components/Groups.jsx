@@ -15,15 +15,12 @@ import LinearProgress from 'material-ui/LinearProgress';
 
 
 function Groups( props ) {
-  console.log("Rendering groups")
-  // console.log("rendering groups props", props)
   if(!props.user){
     return <Redirect to="/signin"/>
   }
   if(!props.groups){
     return ( <LinearProgress mode="indeterminate" /> )
   }
-  // console.log("rendering groups props", props)
   const groups = props.groups
   const groupListItems = Object.keys(groups).map((key)=>{
     return (

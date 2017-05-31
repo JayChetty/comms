@@ -15,7 +15,6 @@ import {greenA200, amber500, blueGrey100, brown400} from 'material-ui/styles/col
 
 
 export default function Form( { form, submission, onFormChange, isCurrentUser, member, memberId, event, score, position} ) {
-  console.log("Form event", event)
   if(!submission && isCurrentUser){//setup form from default
     Object.keys(form.default).forEach((formKey)=>{
       onFormChange(form.default[formKey], formKey)

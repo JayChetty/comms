@@ -6,7 +6,6 @@ import GroupNav from './GroupNav.jsx'
 
 
 function Group({group, events, id, history}){
-  // console.log("Group id", id)
   function gotoChat(){
     history.push(`/groups/${id}/chat`)
   }
@@ -16,8 +15,6 @@ function Group({group, events, id, history}){
     event.id = eventKey
     return event
   })
-  // console.log("groupEvents", groupEvents)
-  console.log("group history", history)
   return (
     <div className="Group">
       <Events group={group} groupId={id} events={groupEvents}> </Events>
@@ -28,12 +25,10 @@ function Group({group, events, id, history}){
 }
 
 const mapStateToProps = (state, router) =>{
-  console.log("router", router)
   const history = router.history
   const group = state.groups[router.match.params.groupId]
   const events = state.events
   const id = router.match.params.groupId
-  // console.log("id", id)
   return {group, events, id, history}
 }
 

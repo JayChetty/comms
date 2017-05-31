@@ -54,17 +54,14 @@ export function firebaseAddMessage(userId, groupId, message){
   let database = window.firebase.database();
   return database.ref(`${messageRoute}/${newMessageKey}`).set(messageData)
   .then((feedback)=>{
-    console.log("feedback from promise", feedback)
     return feedback
   });
 }
 
 export function firebaseUpdateValue(route, value){
   let database = window.firebase.database();
-  console.log("firebaseUpdateValue", route)
   return database.ref(route).set(value)
   .then((feedback)=>{
-    console.log("feedback from promise", feedback)
     return feedback
   });
 }
@@ -111,7 +108,6 @@ export function firebaseSignOut(){
 
 export function firebaseGetCurrentUser(){
   let user = window.firebase.auth().currentUser;
-  console.log("CURRENT user from firebase NEW", user)
   return onAuthStateChangedWrapper()
   .then( user => user )
   .catch( () => null )
