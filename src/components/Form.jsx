@@ -25,15 +25,8 @@ export default function Form( { form, submission, onFormChange, isCurrentUser, m
 
   const keysInOrder = ["conservatives", "labour", "snp", "liberals", "other"]
   // // const events = props.events
-  const formListItems = keysInOrder.map((formKey)=>{
-    // return ( <li key={formKey}> { formKey } </li> )
-    // dataSource[formKey]
-    // let input = null
-    // if(isCurrentUser){
-    //   input = <input onChange={ (event)=>onFormChange(event.target.value, formKey) } value={dataSource[formKey]} name={formKey} type='number' className="Form-input"/>
-    // }else{
-    //   input = <input readOnly value={dataSource[formKey]} name={formKey} type='number' className="Form-input"/>
-    // }
+  const formListItems = keysInOrder.map((formKey, index)=>{
+
     let label = form.labels[formKey]
     if(event.result){
       const actual = event.result[formKey]
@@ -54,6 +47,7 @@ export default function Form( { form, submission, onFormChange, isCurrentUser, m
            floatingLabelText={label}
            type="number"
            value={dataSource[formKey]}
+           autoFocus={index===0}
            disabled={!isCurrentUser || event.status != "open"}
         />
       </div>
@@ -96,8 +90,6 @@ export default function Form( { form, submission, onFormChange, isCurrentUser, m
       </Chip>
     )
   }
-
-
 
   return (
     <Card  zDepth={4} key={memberId} style={{marginBottom:'10px'}}>
