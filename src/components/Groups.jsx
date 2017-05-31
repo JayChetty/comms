@@ -22,10 +22,30 @@ function Groups( props ) {
     return ( <LinearProgress mode="indeterminate" /> )
   }
   const groups = props.groups
+  const user = props.user
+
   const groupListItems = Object.keys(groups).map((key)=>{
+    const group = groups[key]
+    console.log("group", group)
+    const numberOfMembers = Object.keys(group.members).length
+    const numberOfEvents = Object.keys(group.events).length
+    const events = group.events
+    const hasNewEvent = Object.keys(events).some( eventKey => !events[eventKey].submissions[user.id])
+    let infoIcon = null
+    // if(hasNewEvent){
+    //   infoIcon =
+    // }
+    // const submissions = group
+    // console.log("group events", group.events)
     return (
       <div key={key}>
-        <ListItem  primaryText={groups[key].name} key={key} containerElement={<Link to={`/groups/${key}/events`}/>}/>
+        <ListItem
+          primaryText={group.name}
+          secondaryText={`${numberOfMembers} Members, ${numberOfEvents} Event`}
+          key={key}
+          rightIcon={null}
+          containerElement={<Link to={`/groups/${key}/events`}/>}
+        />
         <Divider/>
       </div>
     )

@@ -14,7 +14,11 @@ export default function Events( { group, events, groupId } ) {
   const eventListItems = events.map((event)=>{
     return (
       <div key={event.id}>
-        <ListItem primaryText={event.name}  containerElement={<Link to={`events/${event.id}`}/>} />
+        <ListItem
+          primaryText={event.name}
+          secondaryText={`Open! Click to make prediction`}
+          containerElement={<Link to={`events/${event.id}`}/>}
+        />
         <Divider/>
       </div>
     )
