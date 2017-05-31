@@ -30,12 +30,16 @@ class SignIn extends Component {
     })
   }
   render() {
+    if(this.props.authError){
+
+    }
+    const authDisplay = this.props.authError ? "Wrong username or password" : null
     if(this.props.user){
       return <Redirect to="/groups"/>
     }
     return (
       <section className="SignIn">
-        <p>{this.props.errorMessage}</p>
+        <p style={{width:'75%'}}>{authDisplay}</p>
         <form onSubmit={this.handleSubmit}>
             <TextField
                onChange={this.handleInputChange}

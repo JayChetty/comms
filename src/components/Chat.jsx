@@ -39,7 +39,8 @@ class Chat extends React.Component{
   const message = this.props.userDetails.groups[groupId].currentMessage
   const userId = this.props.user.uid
   const group = this.props.groups[groupId]
-  const messageKeys = Object.keys(group.messages)
+  console.log("group", group)
+  const messageKeys = group.messages ? Object.keys(group.messages) : []
 
   const messageStyle = {
     maxWidth: '75%',
@@ -50,6 +51,8 @@ class Chat extends React.Component{
   const userStyle = {
     alignSelf: 'flex-end'
   }
+
+  console.log("messageKeys", group.messages, group)
 
   const messageItems = messageKeys.map((key)=>{
     const message = group.messages[key]
