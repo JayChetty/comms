@@ -13,7 +13,7 @@ function Event({dispatch, event, group, submission, updateSubmission, submission
 
   let scores = {}
   let sortedMemberKeys = Object.keys(group.members)
-  if(event.result){
+  if(event.result){//order by score
     Object.keys(group.members).forEach((key)=>{
       const memberSubmission = submissions[key] || event.form.default
       scores[key] = error(memberSubmission, event.result)
@@ -21,6 +21,9 @@ function Event({dispatch, event, group, submission, updateSubmission, submission
     sortedMemberKeys = sortedMemberKeys.sort((k1,k2) =>{
       return scores[k1] > scores[k2]
     })
+  }else{//put the currnetUserKey first
+    sortedMemberKeys = sortedMemberKeys.filter( key => key !== currentUserId )
+    sortedMemberKeys.unshift( currentUserId )
   }
 
   const forms = sortedMemberKeys.map((memberId, index)=>{
