@@ -39,7 +39,7 @@ class Chat extends React.Component{
   const message = this.props.userDetails.groups[groupId].currentMessage
   const userId = this.props.user.uid
   const group = this.props.groups[groupId]
-  console.log("group", group)
+
   const messageKeys = group.messages ? Object.keys(group.messages) : []
 
   const messageStyle = {
@@ -52,12 +52,13 @@ class Chat extends React.Component{
     alignSelf: 'flex-end'
   }
 
-  console.log("messageKeys", group.messages, group)
+
 
   const messageItems = messageKeys.map((key)=>{
     const message = group.messages[key]
     const member = group.members[message.userId]
     const isUser = userId === message.userId
+    console.log("isUser", isUser)
     const additionalStyles = isUser ? userStyle : {}
     const style = Object.assign({}, messageStyle, additionalStyles)
     if(!isUser){

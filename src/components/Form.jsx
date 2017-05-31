@@ -92,7 +92,7 @@ export default function Form( { form, submission, onFormChange, isCurrentUser, m
   }
 
   return (
-    <Card  zDepth={4} key={memberId} style={{marginBottom:'10px'}}>
+    <Card  zDepth={3} key={memberId} style={{marginBottom:'10px', width:'80%'}}>
       <CardHeader
         title={member.displayName}
       />
