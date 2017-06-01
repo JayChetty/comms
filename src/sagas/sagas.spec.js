@@ -2,7 +2,7 @@
 import { put, call } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 
-import {firebaseGetCurrentUser, firebaseSignin } from './firebase_helpers'
+import {firebaseGetCurrentUser, firebaseSignin } from '../firebase_helpers'
 
 import { getCurrentUser, incrementAsync, signInSubmit } from './sagas'
 

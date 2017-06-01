@@ -11,14 +11,14 @@ import Group from './components/Group';
 import Event from './components/Event';
 import Chat from './components/Chat';
 
-import reducer from './reducers'
+import reducer from './reducers/reducers'
 import './index.css';
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 
 import {firebaseEventsListener} from './firebase_helpers'
 
-import rootSaga from './sagas'
+import rootSaga from './sagas/sagas'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import { Provider } from 'react-redux';

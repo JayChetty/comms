@@ -4,7 +4,7 @@ import {
   firebaseGetCurrentUser,
   firebaseSignin,
   firebaseSignOut
-} from './firebase_helpers'
+} from '../firebase_helpers'
 
 //(Intuition) These yield out Promises to the watchers that then in turn feedback to them the resolved result
 export function* signInSubmit( action ){
