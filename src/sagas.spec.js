@@ -36,7 +36,7 @@ test('signInSubmit should set user if returned user from auth', () => {
   const user = {detail: "somedetails"}
   const gen = signInSubmit(userDetails)
   gen.next()
-  expect( gen.next({user}).value ).toEqual( put({ type: "SET_USER", user}) );
+  expect( gen.next({user}).value ).toEqual( put({ type: "ACTIVATE_USER", user}) );
 });
 
 test('signInSubmit should set errror if error returned from auth', () => {
@@ -57,7 +57,7 @@ test('getCurrentUser should set user if received user', () => {
   const gen = getCurrentUser()
   gen.next()
   const userDetails = {email: "test@email.com"}
-  expect(gen.next(userDetails).value).toEqual( put({ type: "SET_USER", user: userDetails}) );
+  expect(gen.next(userDetails).value).toEqual( put({ type: "ACTIVATE_USER", user: userDetails}) );
 });
 
 test('getCurrentUser should do nothing if no user', () => {
