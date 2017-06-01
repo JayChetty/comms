@@ -1,11 +1,9 @@
 import React from 'react'
 import './AppHeader.css'
 import 'font-awesome/css/font-awesome.css'
-import { connect } from 'react-redux'
 import FontIcon from 'material-ui/FontIcon';
 import Paper from 'material-ui/Paper';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
-import {Link} from 'react-router-dom'
 
 
 export default function GroupNav({groupId, onChatClick}){

@@ -1,13 +1,11 @@
-import React,{ Component } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom';
 import TextField from 'material-ui/TextField'
 
 import { firebaseAddMessage, firebaseUpdateValue } from '../firebase_helpers'
-import ContentAdd from 'material-ui/svg-icons/content/add'
 import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper';
-import RaisedButton from 'material-ui/RaisedButton';
-import FontIcon from 'material-ui/FontIcon';
+
 
 import IconButton from 'material-ui/IconButton';
 
@@ -58,7 +56,7 @@ class Chat extends React.Component{
     const message = group.messages[key]
     const member = group.members[message.userId]
     const isUser = userId === message.userId
-    console.log("isUser", isUser)
+
     const additionalStyles = isUser ? userStyle : {}
     const style = Object.assign({}, messageStyle, additionalStyles)
     if(!isUser){
@@ -80,10 +78,6 @@ class Chat extends React.Component{
 
     }
   })
-
-  const buttonStyle = {
-
-  }
 
   return(
     <div className="Chat-container">

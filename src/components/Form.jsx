@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Form.css'
 import TextField from 'material-ui/TextField';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
-import FontIcon from 'material-ui/FontIcon';
 import {greenA200, amber500, blueGrey100, brown400} from 'material-ui/styles/colors';
 // import logo from './logo.svg';
 
@@ -48,7 +47,7 @@ export default function Form( { form, submission, onFormChange, isCurrentUser, m
            type="number"
            value={dataSource[formKey]}
            autoFocus={index===0}
-           disabled={!isCurrentUser || event.status != "open"}
+           disabled={!isCurrentUser || event.status !== "open"}
         />
       </div>
     )
@@ -59,7 +58,7 @@ export default function Form( { form, submission, onFormChange, isCurrentUser, m
 
   let infoBox = <Avatar size={32} backgroundColor={greenA200}>{ sum }</Avatar>
 
-  if(!event.result && remaining != 0){
+  if(!event.result && remaining !== 0){
     const adviceText = remaining > 0 ? 'Add' : 'Remove';
     infoBox = (
     <Chip>

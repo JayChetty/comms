@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import Events from './Events'
-import AppHeader from './AppHeader.jsx'
 import GroupNav from './GroupNav.jsx'
 
 

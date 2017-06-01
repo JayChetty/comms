@@ -62,7 +62,7 @@ const mapStateToProps = (state, router) =>{
       title = state.groups[ locationParts[2] ].name
       break;
     default:
-      hasGroup = false,
+      hasGroup = false
       title = "oléApp"
   }
 

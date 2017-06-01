@@ -16,7 +16,7 @@ import './index.css';
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 
-import {firebaseCounterListener, firebaseEventsListener} from './firebase_helpers'
+import {firebaseEventsListener} from './firebase_helpers'
 
 import rootSaga from './sagas'
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -29,7 +29,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Redirect
 } from 'react-router-dom'
 

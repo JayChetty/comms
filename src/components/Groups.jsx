@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import { connect } from 'react-redux'
-import AppHeader from './AppHeader'
 import './Groups.css'
 import Divider from 'material-ui/Divider';
 import {
@@ -22,16 +20,15 @@ function Groups( props ) {
     return ( <LinearProgress mode="indeterminate" /> )
   }
   const groups = props.groups
-  const user = props.user
+  // const user = props.user
 
   const groupListItems = Object.keys(groups).map((key)=>{
     const group = groups[key]
-    console.log("group", group)
     const numberOfMembers = Object.keys(group.members).length
     const numberOfEvents = Object.keys(group.events).length
-    const events = group.events
-    const hasNewEvent = Object.keys(events).some( eventKey => !events[eventKey].submissions[user.id])
-    let infoIcon = null
+    // const events = group.events
+    // const hasNewEvent = Object.keys(events).some( eventKey => !events[eventKey].submissions[user.id])
+    // let infoIcon = null
     // if(hasNewEvent){
     //   infoIcon =
     // }

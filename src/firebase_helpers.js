@@ -107,7 +107,6 @@ export function firebaseSignOut(){
 
 
 export function firebaseGetCurrentUser(){
-  let user = window.firebase.auth().currentUser;
   return onAuthStateChangedWrapper()
   .then( user => user )
   .catch( () => null )

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import { connect } from 'react-redux'
 import './SignIn.css'
-import AppHeader from './AppHeader.jsx'
 import {
   Redirect
 } from 'react-router-dom'

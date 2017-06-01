@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import Form from './Form'
 import { firebaseUpdateValue } from '../firebase_helpers'
-import AppHeader from './AppHeader'
 
 import './Event.css'
 function error(submission, result){
