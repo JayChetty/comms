@@ -21,8 +21,8 @@ export default function Form( { form, submission, onFormChange, isCurrentUser, m
   }
 
   const dataSource = submission || form.default
-
-  const keysInOrder = ["conservatives", "labour", "snp", "liberals", "other"]
+  const keysInOrder = form.order || Object.keys(dataSource)
+  // const keysInOrder = ["conservatives", "labour", "snp", "liberals", "other"]
   // // const events = props.events
   const formListItems = keysInOrder.map((formKey, index)=>{
 
@@ -53,7 +53,7 @@ export default function Form( { form, submission, onFormChange, isCurrentUser, m
     )
   })
 
-  const sum = Object.values( dataSource ).reduce( (acc,curr)=> acc + Number(curr), 0 )
+  const sum = Object.keys( dataSource ).reduce( (acc,curr)=> acc + Number(dataSource[curr]), 0 )
   const remaining = 650 - sum
 
   let infoBox = <Avatar size={32} backgroundColor={greenA200}>{ sum }</Avatar>
