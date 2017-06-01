@@ -1,7 +1,8 @@
 const initialState = {
-  events: [],
+  events: {},
   user:null,
-  authError:null
+  authError:null,
+  groups:{}
 }
 
 export default function(state = initialState, action){
