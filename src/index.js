@@ -9,7 +9,7 @@ import SignIn from './components/SignIn';
 import GroupsContainer from './components/groups/GroupsContainer';
 import GroupContainer from './components/group-events/GroupContainer';
 import Event from './components/Event';
-import Chat from './components/Chat';
+import ChatContainer from './components/group-chat/ChatContainer';
 
 import reducer from './reducers/reducers'
 import './index.css';
@@ -110,7 +110,7 @@ ReactDOM.render(
             <PrivateRoute exact path='/' component={GroupsContainer}/>
             <PrivateRoute exact path='/groups/:groupId/events/:eventId' component={Event}/>
             <PrivateRoute exact path='/groups/:groupId/events' component={GroupContainer}/>
-            <PrivateRoute exact path='/groups/:groupId/chat' component={Chat}/>
+            <PrivateRoute exact path='/groups/:groupId/chat' component={ChatContainer}/>
             <PrivateRoute exact path='/groups' component={GroupsContainer}/>
             <Route path='/signin' component={SignIn}/>
           </div>
