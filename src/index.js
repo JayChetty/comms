@@ -6,8 +6,8 @@ import ReactDOM from 'react-dom';
 
 import AppHeader from './components/AppHeader'
 import SignIn from './components/SignIn';
-import Groups from './components/groups/GroupsContainer';
-import Group from './components/Group';
+import GroupsContainer from './components/groups/GroupsContainer';
+import GroupContainer from './components/group-events/GroupContainer';
 import Event from './components/Event';
 import Chat from './components/Chat';
 
@@ -107,11 +107,11 @@ ReactDOM.render(
       <Router>
           <div>
             <Route path='/' component={AppHeader}/>
-            <PrivateRoute exact path='/' component={Groups}/>
+            <PrivateRoute exact path='/' component={GroupsContainer}/>
             <PrivateRoute exact path='/groups/:groupId/events/:eventId' component={Event}/>
-            <PrivateRoute exact path='/groups/:groupId/events' component={Group}/>
+            <PrivateRoute exact path='/groups/:groupId/events' component={GroupContainer}/>
             <PrivateRoute exact path='/groups/:groupId/chat' component={Chat}/>
-            <PrivateRoute exact path='/groups' component={Groups}/>
+            <PrivateRoute exact path='/groups' component={GroupsContainer}/>
             <Route path='/signin' component={SignIn}/>
           </div>
       </Router>
