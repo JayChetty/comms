@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 
 import AppHeader from './components/AppHeader'
 import SignIn from './components/SignIn';
-import Groups from './components/Groups';
+import Groups from './components/groups/GroupsContainer';
 import Group from './components/Group';
 import Event from './components/Event';
 import Chat from './components/Chat';

@@ -8,7 +8,7 @@ const form = {
   default:{a:1, b:2},
   labels: {a:"A", b:"B"},
   name: "Test",
-  status: "Open"
+  status: "open"
 }
 
 const member={

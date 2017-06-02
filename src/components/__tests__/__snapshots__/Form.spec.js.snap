@@ -191,7 +191,7 @@ exports[`renders correctly 1`] = `
           >
             <label
               className={undefined}
-              htmlFor="a-a-A-11723"
+              htmlFor="a-a-A-57398"
               onTouchTap={undefined}
               style={
                 Object {
@@ -228,7 +228,7 @@ exports[`renders correctly 1`] = `
             <input
               autoFocus={true}
               disabled={true}
-              id="a-a-A-11723"
+              id="a-a-A-57398"
               name="a"
               onBlur={[Function]}
               onChange={[Function]}
@@ -320,7 +320,7 @@ exports[`renders correctly 1`] = `
           >
             <label
               className={undefined}
-              htmlFor="b-b-B-33594"
+              htmlFor="b-b-B-32626"
               onTouchTap={undefined}
               style={
                 Object {
@@ -357,7 +357,7 @@ exports[`renders correctly 1`] = `
             <input
               autoFocus={false}
               disabled={true}
-              id="b-b-B-33594"
+              id="b-b-B-32626"
               name="b"
               onBlur={[Function]}
               onChange={[Function]}

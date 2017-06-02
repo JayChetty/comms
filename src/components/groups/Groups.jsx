@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux'
 import './Groups.css'
 import Divider from 'material-ui/Divider';
 import {
@@ -12,14 +11,13 @@ import {Link} from 'react-router-dom'
 import LinearProgress from 'material-ui/LinearProgress';
 
 
-function Groups( props ) {
-  if(!props.user){
+export default function Groups( {user, groups} ) {
+  if(!user){
     return <Redirect to="/signin"/>
   }
-  if(!props.groups){
+  if(!groups){
     return ( <LinearProgress mode="indeterminate" /> )
   }
-  const groups = props.groups
   // const user = props.user
 
   const groupListItems = Object.keys(groups).map((key)=>{
@@ -53,12 +51,3 @@ function Groups( props ) {
     </List>
   );
 }
-
-
-const mapStateToProps = state => state
-
-const mapDispatchToProps = (dispatch)=>{
-  return { dispatch: dispatch }
-}
-
-export default connect( mapStateToProps, mapDispatchToProps )( Groups )
