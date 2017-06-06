@@ -13,7 +13,6 @@ import ChatContainer from './components/group-chat/ChatContainer';
 
 import reducer from './reducers/reducers'
 import './index.css';
-import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 
 import {firebaseEventsListener} from './firebase_helpers'
@@ -22,6 +21,7 @@ import rootSaga from './sagas/sagas'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 // import {Router, Route, browserHistory, IndexRedirect} from 'react-router';

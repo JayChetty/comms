@@ -15,7 +15,7 @@ function postMessage(message, userId, groupId){
 }
 
 function ChatContainer(props){
-  const chatProps = Object.assign(props, {updateCurrentMessage, postMessage})
+  const chatProps = Object.assign({}, props, {updateCurrentMessage, postMessage})
   return(
     <Chat
       {...chatProps}
