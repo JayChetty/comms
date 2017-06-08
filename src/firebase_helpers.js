@@ -15,7 +15,7 @@ function onAuthStateChangedWrapper(){
 export function firebaseEventsListener(data, callback){
   console.log("listening to events", data)
   let counterRef = window.firebase.database().ref(data);
-  counterRef.once('value', function(snapshot) {
+  counterRef.on('value', function(snapshot) {
     console.log("got value", snapshot)
     callback( snapshot.val() )
   });

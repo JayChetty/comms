@@ -68,6 +68,7 @@ function listenToDBChanges(past){
   if(user && !startedDBListener){
     startedDBListener = true
     firebaseEventsListener(`users/${user.uid}/groups/`, (userGroups)=>{
+      console.log("got user groups", userGroups)
       Object.keys(userGroups).forEach((groupId)=>{
         firebaseEventsListener(`groups/${groupId}`, (group)=>{//TODO check security of this
           return store.dispatch({type: "SET_GROUP", groupId: groupId, group: group})
