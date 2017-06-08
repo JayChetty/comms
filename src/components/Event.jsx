@@ -11,16 +11,18 @@ function error(submission, result){
 function Event({dispatch, event, group, submission, updateSubmission, submissions, currentUserId}){
 
   let scores = {}
-  let sortedMemberKeys = Object.keys(group.members)
+  let sortedMemberKeys = []
+
   if(event.result){//order by score
     Object.keys(group.members).forEach((key)=>{
       const memberSubmission = submissions[key] || event.form.default
       scores[key] = error(memberSubmission, event.result)
     })
-    sortedMemberKeys = sortedMemberKeys.sort((k1,k2) =>{
-      return scores[k1] > scores[k2]
-    })
+    sortedMemberKeys = Object.keys(group.members).sort((k1,k2) =>{
+      return scores[k1] < scores[k2]
+    }).reverse()
   }else{//put the currnetUserKey first
+    sortedMemberKeys = Object.keys(group.members)
     sortedMemberKeys = sortedMemberKeys.filter( key => key !== currentUserId )
     sortedMemberKeys.unshift( currentUserId )
   }

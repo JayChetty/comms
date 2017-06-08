@@ -9,12 +9,18 @@ import Divider from 'material-ui/Divider';
 
 export default function Events( { group, events, groupId } ) {
   // const events = props.events
+  console.log("group", group)
+  const textMap = {
+    open: "Open! Click to make prediction",
+    locked: "Closed. Awaiting Result",
+    finished: "Results in! Click to see results"
+  }
   const eventListItems = events.map((event)=>{
     return (
       <div key={event.id}>
         <ListItem
           primaryText={event.name}
-          secondaryText={`Open! Click to make prediction`}
+          secondaryText={textMap[event.status]}
           containerElement={<Link to={`events/${event.id}`}/>}
         />
         <Divider/>
